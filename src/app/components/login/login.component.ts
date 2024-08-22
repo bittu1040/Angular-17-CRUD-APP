@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -25,6 +25,7 @@ import { AUTH_ERRORS } from '../../shared/error-constants';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -32,6 +33,8 @@ import { AUTH_ERRORS } from '../../shared/error-constants';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({});
   loginError: string = '';
+
+  username: any;
 
   authErrors = AUTH_ERRORS;
 
@@ -59,6 +62,11 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
         localStorage.setItem('isLoggedIn', 'true');
         console.log("login success")
+        const user = data.user;
+        if (user) {
+          this.username = user.displayName || user.email;
+          localStorage.setItem('username', this.username); 
+        }
         // this.firebaseAuth.isLoggedInSubject.next(true);
       })
       .catch(({ code }) => {

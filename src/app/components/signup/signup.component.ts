@@ -9,7 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +26,7 @@ import { NgToastService } from 'ng-angular-popup';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    RouterLink
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',

@@ -16,7 +16,8 @@ export class FirebaseAuthService {
   }
 
   logout() {
-    localStorage.removeItem('isLoggedIn');
-    return this.afAuth.signOut(); 
+    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.removeItem('username');
+    return this.afAuth.signOut();
   }
 }

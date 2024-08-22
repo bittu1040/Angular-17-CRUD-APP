@@ -18,23 +18,25 @@
   }
 
 
-  .home,
-  .table_example {
+  .home, .table_example, .contribute{
     display: none;
   }
 
-  .contribute,
   .user_menu {
-    display: block;
+    display: flex;
   }
 }
 
 @media only screen and (min-width: 601px) {
-  
-  .toolbar-buttons a {
+
+  .toolbar-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+
+  .user_menu{
+    display: flex;
   }
 }
