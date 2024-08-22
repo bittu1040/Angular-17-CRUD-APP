@@ -41,7 +41,11 @@ export class SignupComponent {
     private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private toastService: NgToastService
-  ) {}
+  ) {
+    if(this.firebaseAuth.IsLoggedIn()) {
+      this.router.navigate(['/home']);
+    }
+  }
 
   ngOnInit() {
     this.signupForm = this.fb.group(
