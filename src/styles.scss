@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.auth-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

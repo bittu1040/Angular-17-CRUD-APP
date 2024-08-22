@@ -5,6 +5,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
+import { NgToastModule, ToasterPosition } from 'ng-angular-popup';
 
 
 
@@ -26,12 +27,16 @@ export interface PeriodicElement {
         RouterLink,
         RouterOutlet,
         FooterComponent,
+        NgToastModule
     ],
 })
 export class AppComponent implements OnInit {
   title = 'crud-app-angular';
   isMobile: boolean = false;
   isSideNavOpened= true;
+
+  ToasterPosition = ToasterPosition;
+
   @ViewChild('sidenav') sidenav!: MatSidenav;
 
   constructor(private breakpointObserver: BreakpointObserver) {

@@ -1,0 +1,50 @@
+<div class="auth-wrapper pt-5">
+  <mat-card class="signup-card">
+    <mat-card-header>
+      <mat-card-title class="mb-3">Sign Up</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="email" required>
+          @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+          <mat-error>Valid email is required.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" required>
+          @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
+          <mat-error>Password should be at least 6 characters.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput type="password" formControlName="confirmPassword" required>
+          <!-- 
+            currently here custom validation is working if i use div tag outside form tag.
+            but not working as expected with mat-error: 
+            So we need to fix that in mat-error
+          -->
+          @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
+            <mat-error>
+              password is not matching
+            </mat-error>
+            }
+        </mat-form-field>
+        <!-- @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
+        <div class="cross-validation-error-message alert alert-danger">
+          password is not matching
+         </div>
+        } -->
+
+        <button class="w-100" mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">
+          Sign Up
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

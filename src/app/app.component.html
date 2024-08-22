@@ -10,10 +10,11 @@
   <mat-sidenav-content>
 
     <div class="container">
-      <button class="btn btn-primary">test</button>
       <router-outlet></router-outlet>
     </div>
 
     <app-footer></app-footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ng-toast class="snippet-toaster" [position]="ToasterPosition.TOP_RIGHT" />

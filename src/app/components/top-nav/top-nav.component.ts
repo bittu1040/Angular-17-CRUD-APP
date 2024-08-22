@@ -3,13 +3,14 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatMenuModule} from '@angular/material/menu';
 
 @Component({
     selector: 'app-top-nav',
     templateUrl: './top-nav.component.html',
     styleUrls: ['./top-nav.component.scss'],
     standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink]
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule]
 })
 export class TopNavComponent {
 

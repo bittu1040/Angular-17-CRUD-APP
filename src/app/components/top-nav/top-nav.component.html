@@ -10,7 +10,27 @@
         <a href="https://github.com/bittu1040/Angular-17-CRUD-APP" target="_blank" class="btn btn btn-outline">Contribute <i class="fa-brands fa-github"></i></a>
         <a class="btn" routerLink="/home">Home</a>
         <a class="btn" routerLink="/table">Table</a>
+        <a class="btn" aria-label="User account" [matMenuTriggerFor]="userMenu"> <mat-icon>account_circle</mat-icon> </a>
       </div>
     </div>
   </mat-toolbar>
-  
+
+
+  <mat-menu #userMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>Username</span>
+    </button>
+    <button mat-menu-item routerLink="/login">
+      <mat-icon>login</mat-icon>
+      <span >Login</span>
+    </button>
+    <button mat-menu-item routerLink="/signup">
+      <mat-icon>app_registration</mat-icon>
+      <span>Sign up</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
