@@ -47,4 +47,8 @@ export class FirebaseAuthService {
     this.isLoggedInSignal.set(false);
     return this.afAuth.signOut();
   }
+
+  forgotPassword(email: string) {
+    return this.afAuth.sendPasswordResetEmail(email);
+  }
 }
