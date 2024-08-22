@@ -18,7 +18,9 @@
   }
 
 
-  .home, .table_example, .contribute{
+  .home,
+  .table_example,
+  .contribute {
     display: none;
   }
 
@@ -36,7 +38,7 @@
     gap: 10px;
   }
 
-  .user_menu{
+  .user_menu {
     display: flex;
   }
 }
