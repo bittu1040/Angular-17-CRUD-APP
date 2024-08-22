@@ -25,19 +25,19 @@
       <mat-icon>translate</mat-icon>
       <span>Language</span>
     </button>
-    @if(username){
+    @if(username()){
     <button mat-menu-item>
       <mat-icon>person</mat-icon>
-      <span>{{username |  slice: 0 : 5}}</span>
+      <span>{{username() |  slice: 0 : 5}}</span>
     </button>
     }
-   @if(!isLoggedIn){
+   @if(!isLoggedIn()){
      <button mat-menu-item routerLink="/login">
       <mat-icon>login</mat-icon>
       <span >Login</span>
      </button>
     }
-    @if(isLoggedIn){
+    @if(isLoggedIn()){
       <button mat-menu-item (click)="openLogoutDialog()">
         <mat-icon>logout</mat-icon>
         <span>Logout</span>

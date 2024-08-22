@@ -60,14 +60,12 @@ export class LoginComponent implements OnInit {
       .then((data) => {
         this.toastService.success('Login successful', 'LOGIN SUCCESS', 4000);
         this.router.navigateByUrl('/home');
-        localStorage.setItem('isLoggedIn', 'true');
         console.log("login success")
         const user = data.user;
         if (user) {
           this.username = user.displayName || user.email;
-          localStorage.setItem('username', this.username); 
+          this.firebaseAuth.setUsername(this.username);
         }
-        // this.firebaseAuth.isLoggedInSubject.next(true);
       })
       .catch(({ code }) => {
         console.log("login error")

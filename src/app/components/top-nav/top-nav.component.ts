@@ -7,6 +7,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import { SlicePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
+import { FirebaseAuthService } from '../../services/firebase-auth.service';
 
 @Component({
     selector: 'app-top-nav',
@@ -17,19 +18,21 @@ import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog
 })
 export class TopNavComponent implements OnInit{
 
-  isLoggedIn = false;
-  username: string | null = null;
-
   isDarkTheme="";
   @Output() sidenavToggle = new EventEmitter<void>();
   public dialog = inject(MatDialog);
+  public authService = inject(FirebaseAuthService);
+
+  username = this.authService.getUsername();
+  isLoggedIn = this.authService.IsLoggedIn();
+
 
 
   ngOnInit(): void {
-    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    if (this.isLoggedIn) {
-      this.username = localStorage.getItem('username');
-    }
+    // this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    // if (this.isLoggedIn) {
+    //   this.username = localStorage.getItem('username');
+    // }
   }
   toggleSidenav() {
     this.sidenavToggle.emit();
