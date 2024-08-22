@@ -1,0 +1,33 @@
+.mat-toolbar {
+    background: rgb(171, 201, 201);
+    background: radial-gradient(circle, rgba(171, 201, 201, 1) 0%, rgba(0, 255, 235, 1) 100%);
+}
+
+
+@media only screen and (max-width: 460px) {
+    mat-toolbar {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .toolbar-buttons {
+      display: flex;
+      justify-content: flex-end;
+    }
+  
+    .toolbar-buttons a {
+      display: none;
+    }
+  
+    .toolbar-buttons a:nth-child(1) {
+      display: block;
+    }
+}
+
+@media only screen and (min-width: 601px) {
+    .toolbar-buttons {
+      display: flex;
+      gap: 10px;
+    }
+}

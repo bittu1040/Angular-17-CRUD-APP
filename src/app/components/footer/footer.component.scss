@@ -1,0 +1,22 @@
+footer {
+    background: rgb(171,201,201);
+    background: radial-gradient(circle, rgba(171,201,201,1) 0%, rgba(0,255,235,1) 100%);
+    
+    text-align: center;
+    padding: 6px;
+    margin-top: 10px;
+  }
+  
+  .copyright {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .copyright {
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
