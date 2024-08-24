@@ -1,6 +1,17 @@
 mat-sidenav-container {
   height: calc(100vh - 64px);
 
+  // ::ng-deep mat-sidenav {
+  //   background-color: var(--bgColor);
+
+  //   mat-nav-list {
+  //     mat-list-item {
+  //       .mdc-list-item__primary-text {
+  //         color: var(--textColor);
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 @media only screen and (max-width: 460px) {
