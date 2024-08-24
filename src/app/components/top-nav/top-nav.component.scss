@@ -1,9 +1,32 @@
 .mat-toolbar {
-  background: rgb(171, 201, 201);
-  background: radial-gradient(circle, rgba(171, 201, 201, 1) 0%, rgba(0, 255, 235, 1) 100%);
+  color: var(--textColor);
+  background: var(--bgColor);
+  border-bottom: 1px solid var(--borderColor);
 }
 
+.toolbar-buttons {
+  a {
+    color: var(--textColor);
+    background: var(--bgColor);
+  }
+}
 
+::ng-deep .popup-menu {
+  color: var(--textColor) !important;
+  background: var(--bgColor) !important;
+
+  mat-icon {
+    color: var(--textColor) !important;
+    background: var(--bgColor) !important;
+  }
+
+  button {
+    span {
+      color: var(--textColor) !important;
+      background: var(--bgColor) !important;
+    }
+  }
+}
 
 @media only screen and (max-width: 460px) {
   mat-toolbar {
