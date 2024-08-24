@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NgModeSwitcherService } from 'ngx-mode-switcher';
+import { NgxModeSwitcherService } from 'ngx-mode-switcher';
 
 @Component({
   selector: 'app-footer',
@@ -12,8 +12,8 @@ import { NgModeSwitcherService } from 'ngx-mode-switcher';
 export class FooterComponent {
   selectedMode = "light";
 
-  constructor(private ngModeSwitcherService: NgModeSwitcherService) {
-    this.ngModeSwitcherService.modeChanged$.subscribe((mode: string) => {
+  constructor(private ngxModeSwitcherService: NgxModeSwitcherService) {
+    this.ngxModeSwitcherService.modeChanged$.subscribe((mode: string) => {
       this.selectedMode = mode;
     })
   }
