@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { NgModeSwitcherService } from 'ng-mode-switcher';
+import { NgModeSwitcherService } from 'ngx-mode-switcher';
 
 @Component({
   selector: 'app-footer',

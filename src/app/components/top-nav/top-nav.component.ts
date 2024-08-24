@@ -8,14 +8,14 @@ import { SlicePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import { IConfig, NgModeSwitcherModule } from 'ng-mode-switcher';
+import { IConfig, NgxModeSwitcherModule } from 'ngx-mode-switcher';
 
 @Component({
   selector: 'app-top-nav',
   templateUrl: './top-nav.component.html',
   styleUrls: ['./top-nav.component.scss'],
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule, SlicePipe, NgModeSwitcherModule]
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule, SlicePipe, NgxModeSwitcherModule]
 })
 export class TopNavComponent implements OnInit {
   isDarkTheme = "";
