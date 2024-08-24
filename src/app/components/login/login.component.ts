@@ -44,9 +44,6 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private toastService: NgToastService
   ) {
-    // if(this.firebaseAuth.IsLoggedIn()) {
-    //   this.router.navigate(['/home']);
-    // }
   }
 
   ngOnInit() {

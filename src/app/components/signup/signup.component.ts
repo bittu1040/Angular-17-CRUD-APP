@@ -42,9 +42,6 @@ export class SignupComponent {
     private router: Router,
     private toastService: NgToastService
   ) {
-    // if(this.firebaseAuth.IsLoggedIn()) {
-    //   this.router.navigate(['/home']);
-    // }
   }
 
   ngOnInit() {
