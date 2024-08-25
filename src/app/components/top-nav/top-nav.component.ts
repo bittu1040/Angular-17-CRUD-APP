@@ -8,17 +8,18 @@ import { SlicePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @Component({
     selector: 'app-top-nav',
     templateUrl: './top-nav.component.html',
     styleUrls: ['./top-nav.component.scss'],
     standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule, SlicePipe]
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule, SlicePipe, MatSlideToggleModule]
 })
 export class TopNavComponent implements OnInit{
 
-  isDarkTheme="";
+  isDarkTheme=false;
   @Output() sidenavToggle = new EventEmitter<void>();
   public dialog = inject(MatDialog);
   public authService = inject(FirebaseAuthService);
@@ -36,6 +37,20 @@ export class TopNavComponent implements OnInit{
   }
   toggleSidenav() {
     this.sidenavToggle.emit();
+  }
+
+  toggleTheme() {
+    this.isDarkTheme = !this.isDarkTheme;
+    if(!this.isDarkTheme){
+      if(!document.body.classList.contains('dark')){
+        document.body.classList.add('dark');
+      }
+    }
+    else{
+      if(document.body.classList.contains('dark')){
+        document.body.classList.remove('dark');
+      }
+    }
   }
 
   openLogoutDialog() {

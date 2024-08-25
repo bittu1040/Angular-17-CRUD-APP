@@ -1,10 +1,11 @@
-<mat-toolbar color="primary" style="justify-content: space-between;">
-  <div style="display: flex; align-items: center; color: black;">
+<mat-toolbar  style="justify-content: space-between;">
+  <div style="display: flex; align-items: center;">
     <button mat-icon-button class="example-icon" (click)="toggleSidenav()" id="menu-button">
       <mat-icon>menu</mat-icon>
     </button>
     <div routerLink="/">CRUD APP Angular 17</div>
   </div>
+  <mat-slide-toggle (change)="toggleTheme()">Light/Dark</mat-slide-toggle>
   <div style="display: flex; align-items: center;">
     <div class="toolbar-buttons">
       <a href="https://github.com/bittu1040/Angular-17-CRUD-APP" target="_blank" class="btn contribute">Contribute <i

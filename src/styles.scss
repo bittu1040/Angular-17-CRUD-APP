@@ -1,7 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  font-family: 'Poppins', sans-serif;
+}
+
+body{
+  --primary-bg-color: rgb(0, 248, 248);
+  --primary-text-color: rgb(0, 0, 0);
+  --main-bg-color: #F9F3F3;
+  &.dark {
+    --primary-bg-color: #222831;
+    --primary-text-color: #ffd369;
+    --main-bg-color: #393e46
+  }
+}
 
 .auth-wrapper {
     display: flex;
