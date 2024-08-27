@@ -4,6 +4,14 @@ mat-sidenav-container {
 
 }
 
+mat-sidenav{
+  background-color: var(--main-bg-color-1);
+}
+
+.sidenavtext {
+  color: var(--primary-text-color);
+}
+
 @media only screen and (max-width: 460px) {
   mat-toolbar {
     font-size: 1rem;

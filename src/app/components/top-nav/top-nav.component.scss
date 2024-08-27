@@ -4,10 +4,11 @@
   // background: radial-gradient(circle, rgba(171, 201, 201, 1) 0%, rgba(0, 255, 235, 1) 100%);
 }
 
-a{
+.text, a{
   color: var(--primary-text-color);
 
 }
+
 
 @media only screen and (max-width: 460px) {
   mat-toolbar {

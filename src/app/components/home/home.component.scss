@@ -1,3 +1,13 @@
+
+.card-body{
+    background: var(--main-bg-color-1);
+    color: var(--primary-text-color);
+    ul, li {
+        background: var(--main-bg-color-1);
+        color: var(--primary-text-color);
+      }
+}
+
 ul{
     font-size: medium;
 }

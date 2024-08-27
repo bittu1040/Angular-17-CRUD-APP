@@ -12,10 +12,12 @@ body{
   --primary-bg-color: rgb(0, 248, 248);
   --primary-text-color: rgb(0, 0, 0);
   --main-bg-color: #F9F3F3;
+  --main-bg-color-1: rgb(219, 250, 250);
   &.dark {
     --primary-bg-color: #222831;
     --primary-text-color: #ffd369;
-    --main-bg-color: #393e46
+    --main-bg-color: #393e46;
+    --main-bg-color-1: #2f3134;
   }
 }
 

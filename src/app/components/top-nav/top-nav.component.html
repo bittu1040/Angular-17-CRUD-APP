@@ -5,11 +5,9 @@
     </button>
     <div routerLink="/">CRUD APP Angular 17</div>
   </div>
-  <mat-slide-toggle (change)="toggleTheme()">Light/Dark</mat-slide-toggle>
   <div style="display: flex; align-items: center;">
     <div class="toolbar-buttons">
-      <a href="https://github.com/bittu1040/Angular-17-CRUD-APP" target="_blank" class="btn contribute">Contribute <i
-          class="fa-brands fa-github"></i></a>
+      <mat-slide-toggle (change)="toggleTheme()"><div class="text"> Light/Dark </div></mat-slide-toggle>
       <a class="btn home" routerLink="/home">Home</a>
       <a class="btn table_example" routerLink="/table">Table</a>
       <a class="btn user_menu" aria-label="User account" [matMenuTriggerFor]="userMenu">

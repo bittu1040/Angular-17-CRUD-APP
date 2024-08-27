@@ -19,7 +19,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 })
 export class TopNavComponent implements OnInit{
 
-  isDarkTheme=false;
+  isDarkTheme=true;
   @Output() sidenavToggle = new EventEmitter<void>();
   public dialog = inject(MatDialog);
   public authService = inject(FirebaseAuthService);
@@ -30,10 +30,6 @@ export class TopNavComponent implements OnInit{
 
 
   ngOnInit(): void {
-    // this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-    // if (this.isLoggedIn) {
-    //   this.username = localStorage.getItem('username');
-    // }
   }
   toggleSidenav() {
     this.sidenavToggle.emit();
