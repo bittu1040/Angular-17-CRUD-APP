@@ -1,38 +1,38 @@
-<div class="auth-wrapper pt-5">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title class="mb-3">Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" required>
-          @if (!loginForm.get('email')?.valid) {
-          <mat-error>Please enter a valid email</mat-error>
-          }
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" required>
-          @if (!loginForm.get('password')?.valid) {
-          <mat-error>Password is required</mat-error>
-          }
-        </mat-form-field>
-
-        <button class="full-width" mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
-          Login
-        </button>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button color="accent" routerLink="/signup" class="full-width">
-        Not registered? Register here
-      </button>
-      <button mat-button color="primary" routerLink="/forgot-password" class="full-width">
-        Forgot Password?
-      </button>
-    </mat-card-actions>
-  </mat-card>
+<div class="row justify-content-center pt-5">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">Login</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" required>
+            @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched))
+            {
+            <div class="text-danger">
+              Please enter a valid email
+            </div>
+            }
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" required>
+            @if (loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty ||
+            loginForm.get('password')?.touched)) {
+            <div class="text-danger">
+              Password is required
+            </div>
+            }
+          </div>
+          <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
+        </form>
+      </div>
+      <div class="card-footer">
+        <a routerLink="/signup" class="btn btn-link w-100">Not registered? Register here</a>
+        <a routerLink="/forgot-password" class="btn btn-link w-100">Forgot Password?</a>
+      </div>
+    </div>
+  </div>
 </div>
