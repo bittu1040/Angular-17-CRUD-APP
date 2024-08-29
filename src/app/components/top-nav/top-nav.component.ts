@@ -19,7 +19,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 })
 export class TopNavComponent implements OnInit{
 
-  isDarkTheme=true;
+  isDarkTheme=false;
   @Output() sidenavToggle = new EventEmitter<void>();
   public dialog = inject(MatDialog);
   public authService = inject(FirebaseAuthService);
@@ -30,6 +30,7 @@ export class TopNavComponent implements OnInit{
 
 
   ngOnInit(): void {
+    this.initializeTheme();
   }
   toggleSidenav() {
     this.sidenavToggle.emit();
@@ -37,15 +38,28 @@ export class TopNavComponent implements OnInit{
 
   toggleTheme() {
     this.isDarkTheme = !this.isDarkTheme;
-    if(!this.isDarkTheme){
-      if(!document.body.classList.contains('dark')){
-        document.body.classList.add('dark');
-      }
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
     }
-    else{
-      if(document.body.classList.contains('dark')){
-        document.body.classList.remove('dark');
-      }
+    localStorage.setItem('dark-theme', JSON.stringify(this.isDarkTheme));
+  }
+  
+  initializeTheme() {
+    const savedTheme = localStorage.getItem('dark-theme');
+    console.log("dark", savedTheme);
+  
+    if (savedTheme !== null) {
+      this.isDarkTheme = JSON.parse(savedTheme);
+    } else {
+      this.isDarkTheme = false;
+    }
+  
+    if (this.isDarkTheme) {
+      document.body.classList.add('dark');
+    } else {
+      document.body.classList.remove('dark');
     }
   }
 
