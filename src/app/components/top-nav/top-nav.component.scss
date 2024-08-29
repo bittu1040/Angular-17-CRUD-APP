@@ -9,6 +9,10 @@
 
 }
 
+.user-profile{
+  background: var(--primary-bg-color);
+}
+
 
 @media only screen and (max-width: 460px) {
   mat-toolbar {
@@ -52,6 +56,9 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+}
+.link-style:hover{
+  background: rgb(209, 209, 209);
 }
 
 i{

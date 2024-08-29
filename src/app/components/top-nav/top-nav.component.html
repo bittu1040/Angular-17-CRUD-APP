@@ -7,19 +7,16 @@
   </div>
   <div style="display: flex; align-items: center;">
     <div class="toolbar-buttons">
-      <mat-slide-toggle (change)="toggleTheme()">
-        <div class="text"> Light/Dark </div>
-      </mat-slide-toggle>
       <a class="btn home" routerLink="/home">Home</a>
       <a class="btn table_example" routerLink="/table">Table</a>
       <a class="btn user_menu" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-auto-close="outside">
         <i class="fa-solid fa-user-circle"></i>
       </a>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <ul class="dropdown-menu user-profile" aria-labelledby="dropdownMenuLink">
         <li>
           <a class="dropdown-item link-style">
             <i [ngClass]="isDarkTheme ? 'fa-solid fa-moon me-3' : 'fa-solid fa-sun me-3'"></i>
-            <span>Theme</span>
+            <mat-slide-toggle (change)="toggleTheme()"></mat-slide-toggle>
           </a>
         </li>
         <li>
