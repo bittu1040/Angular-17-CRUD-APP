@@ -1,4 +1,4 @@
-<mat-toolbar  style="justify-content: space-between;">
+<mat-toolbar style="justify-content: space-between;">
   <div style="display: flex; align-items: center;">
     <button mat-icon-button class="example-icon" (click)="toggleSidenav()" id="menu-button">
       <mat-icon>menu</mat-icon>
@@ -7,48 +7,58 @@
   </div>
   <div style="display: flex; align-items: center;">
     <div class="toolbar-buttons">
-      <mat-slide-toggle (change)="toggleTheme()"><div class="text"> Light/Dark </div></mat-slide-toggle>
+      <mat-slide-toggle (change)="toggleTheme()">
+        <div class="text"> Light/Dark </div>
+      </mat-slide-toggle>
       <a class="btn home" routerLink="/home">Home</a>
       <a class="btn table_example" routerLink="/table">Table</a>
-      <a class="btn user_menu" aria-label="User account" [matMenuTriggerFor]="userMenu">
-        <mat-icon>account_circle</mat-icon> </a>
+      <a class="btn user_menu" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+        <i class="fa-solid fa-user-circle"></i>
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li>
+          <a class="dropdown-item link-style">
+            <i [ngClass]="isDarkTheme ? 'fa-solid fa-moon me-3' : 'fa-solid fa-sun me-3'"></i>
+            <span>Theme</span>
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item link-style">
+            <i class="fa-solid fa-globe me-3"></i>
+            <span>Language</span>
+          </a>
+        </li>
+        @if(username()){
+        <li>
+          <a class="dropdown-item link-style">
+            <i class="fa-solid fa-person me-4"></i>
+            <span>{{username() | slice: 0 : 5 | titlecase}}</span>
+          </a>
+        </li>
+      }
+      @if(!isLoggedIn()){
+        <li>
+          <a class="dropdown-item link-style" routerLink="/login">
+            <i class="fa-solid fa-right-to-bracket me-3"></i>
+            <span>Login</span>
+          </a>
+        </li>
+      }
+      @if(isLoggedIn()){
+        <li>
+          <a class="dropdown-item link-style" (click)="openLogoutDialog()">
+            <i class="fa-solid fa-right-from-bracket me-3"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      }
+        <li>
+          <a class="link-style dropdown-item" href="https://github.com/bittu1040/Angular-17-CRUD-APP" target="_blank">
+            <i class="fa-brands fa-github me-3"></i>
+            <span>Contribute</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </mat-toolbar>
-
-
-<mat-menu #userMenu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>{{ isDarkTheme ? 'dark_mode' : 'light_mode' }}</mat-icon>
-    <span>Theme</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>translate</mat-icon>
-    <span>Language</span>
-  </button>
-  @if(username()){
-  <button mat-menu-item>
-    <mat-icon>person</mat-icon>
-    <span>{{username() | slice: 0 : 5}}</span>
-  </button>
-  }
-  @if(!isLoggedIn()){
-  <button mat-menu-item routerLink="/login">
-    <mat-icon>login</mat-icon>
-    <span>Login</span>
-  </button>
-  }
-  @if(isLoggedIn()){
-  <button mat-menu-item (click)="openLogoutDialog()">
-    <mat-icon>logout</mat-icon>
-    <span>Logout</span>
-  </button>
-  }
-
-  <button mat-menu-item>
-    <a href="https://github.com/bittu1040/Angular-17-CRUD-APP" target="_blank" class="link-style">
-      <i class="fa-brands fa-github me-3"></i>
-      <span>Contribute</span>
-    </a>
-  </button>
-</mat-menu>

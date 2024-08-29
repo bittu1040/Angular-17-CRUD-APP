@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
-import { SlicePipe } from '@angular/common';
+import { NgClass, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
@@ -15,7 +15,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     templateUrl: './top-nav.component.html',
     styleUrls: ['./top-nav.component.scss'],
     standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule, SlicePipe, MatSlideToggleModule]
+    imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule, SlicePipe, MatSlideToggleModule, NgClass, TitleCasePipe]
 })
 export class TopNavComponent implements OnInit{
 

@@ -29,9 +29,6 @@
     display: none;
   }
 
-  .user_menu {
-    display: flex;
-  }
 }
 
 @media only screen and (min-width: 601px) {
@@ -43,7 +40,20 @@
     gap: 10px;
   }
 
-  .user_menu {
-    display: flex;
-  }
+}
+
+
+.user_menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.link-style{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+i{
+  font-size: 20px;
 }
