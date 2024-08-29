@@ -1,7 +1,7 @@
 .mat-toolbar {
   background: var(--primary-bg-color);
   color: var(--primary-text-color);
-  // background: radial-gradient(circle, rgba(171, 201, 201, 1) 0%, rgba(0, 255, 235, 1) 100%);
+  background: var(--background-gradient);
 }
 
 .text, a{

@@ -13,11 +13,13 @@ body{
   --primary-text-color: rgb(0, 0, 0);
   --main-bg-color: #F9F3F3;
   --main-bg-color-1: rgb(219, 250, 250);
+  --background-gradient: radial-gradient(circle, rgba(171, 201, 201, 1) 0%, rgba(0, 255, 235, 1) 100%); // Gradient background
   &.dark {
     --primary-bg-color: #222831;
     --primary-text-color: #ffd369;
     --main-bg-color: #393e46;
     --main-bg-color-1: #2f3134;
+    --background-gradient: radial-gradient(circle, rgba(60, 60, 60, 1) 0%, rgba(30, 30, 30, 1) 100%); // Gradient background for dark mode
   }
 }
 
