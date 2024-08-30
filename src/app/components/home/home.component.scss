@@ -16,3 +16,27 @@ ul{
 .card {
     border-radius: 0;
 }
+
+.list-group-item{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.implemented{
+    i{
+        color: green
+    }
+}
+
+.not-implemented{
+    i{
+        color: red
+    }
+}
+
+.ongoing{
+    i{
+        color: orange
+    }
+}
