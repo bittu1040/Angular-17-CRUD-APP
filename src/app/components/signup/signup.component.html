@@ -1,56 +1,64 @@
-<div class="auth-wrapper pt-5">
-  <mat-card class="signup-card">
-    <mat-card-header>
-      <mat-card-title class="mb-3">Sign Up</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput type="email" formControlName="email" required>
-          @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
-          <mat-error>Valid email is required.</mat-error>
-          }
-        </mat-form-field>
+<div class="row justify-content-center pt-5">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="mb-0">Sign Up</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" required>
+            @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+            <div class="text-danger">
+              Please enter a valid email
+            </div>
+            }
+          </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput type="password" formControlName="password" required>
-          @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
-          <mat-error>Password should be at least 6 characters.</mat-error>
-          }
-        </mat-form-field>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" formControlName="password" required>
+            @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
+            <div class="text-danger">
+              Password should be at least 6 characters.
+            </div>
+            }
+          </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Confirm Password</mat-label>
-          <input matInput type="password" formControlName="confirmPassword" required>
+          <div class="mb-3">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
+            @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
+            <div class="text-danger">
+              Password is not matching
+            </div>
+            }
+          </div>
+
+          <button class="btn btn-primary w-100" type="submit" [disabled]="signupForm.invalid">
+            Sign Up
+          </button>
+        </form>
+      </div>
+      <div class="card-footer">
+        <a routerLink="/login" class="btn btn-link w-100">
+          Already registered? Login here
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
           <!-- 
             currently here custom validation is working if i use div tag outside form tag.
             but not working as expected with mat-error: 
             So we need to fix that in mat-error
           -->
-          @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
-            <mat-error>
-              password is not matching
-            </mat-error>
-            }
-        </mat-form-field>
-        <!-- @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
+
+            <!-- @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
         <div class="cross-validation-error-message alert alert-danger">
           password is not matching
          </div>
-        } -->
-
-        <button class="w-100" mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid">
-          Sign Up
-        </button>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button color="accent" routerLink="/login" class="full-width">
-        Already registered? Login here
-      </button>
-    </mat-card-actions>
-
-  </mat-card>
-</div>
+        }-->

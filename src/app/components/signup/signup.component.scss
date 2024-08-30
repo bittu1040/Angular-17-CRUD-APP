@@ -1,12 +1,17 @@
-.signup-card {
+.card {
   max-width: 500px;
-  padding: 1rem;
+  background: var(--main-bg-color-1);
+  color: var(--primary-text-color);
 }
 
-.full-width {
-  width: 100%;
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  a{
+    color: var(--primary-text-color);
+  }
 }
 
-mat-form-field {
+.form-control{
   margin-bottom: 1rem;
 }
