@@ -12,3 +12,26 @@ th.mat-header-cell {
     text-align: left;
     max-width: 300px;
 }
+
+tr{
+    background: var(--main-bg-color-1);
+    color: var(--primary-text-color);
+}
+
+.search-input {
+    background-color: var(--main-bg-color-1);
+    color: var(--primary-text-color);
+    border-radius: 4px;
+    padding: 8px;
+  }
+  
+  .form-control::placeholder {
+    color: var(--primary-text-color);
+    opacity: 0.8;
+  }
+  
+  .form-control {
+    border-color: var(--primary-text-color);
+  }
+
+  

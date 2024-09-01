@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgIf } from '@angular/common';
 import { DataService } from '../../data.service';
+import { FirestoreDbService } from '../../services/firestore-db.service';
 
 @Component({
     selector: 'app-user-form-dialog',
@@ -22,7 +23,7 @@ export class UserFormDialogComponent {
   editDialog= false;
   userId=0;
 
-  constructor(private fb: FormBuilder, private dataService: DataService,
+  constructor(private fb: FormBuilder, private dataService: DataService, private firestoreDbService: FirestoreDbService,
     private dialogRef: MatDialogRef<UserFormDialogComponent>,
     @Inject(MAT_DIALOG_DATA) data: { message: string, editDialog: boolean,userId: number }
   ) {
@@ -33,13 +34,13 @@ export class UserFormDialogComponent {
     this.addUserForm = this.fb.group({
       name: ['', Validators.required],
       city: ['', Validators.required],
-      company: ['', Validators.required],
+      age: ['', Validators.required],
     });
 
     this.editUserForm= this.fb.group({
       name: [''],
       city:[''],
-      company: ['']
+      age: ['']
     })
 
     this.getUserDataForEdit();
@@ -48,7 +49,7 @@ export class UserFormDialogComponent {
   }
 
   getUserDataForEdit(){
-    this.dataService.getEmpDetails().subscribe((allUserData:any)=>{
+    this.firestoreDbService.getPeople().subscribe((allUserData:any)=>{
       console.log("id: ", this.userId)
       allUserData.filter((data:any)=>{
         if(data.id===this.userId){
