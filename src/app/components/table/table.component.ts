@@ -13,6 +13,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgFor } from '@angular/common';
 
+interface User {
+  id?: string;
+  name: string;
+  city: string;
+  age: number;
+}
+
 @Component({
     selector: 'app-table',
     templateUrl: './table.component.html',
@@ -22,28 +29,25 @@ import { NgFor } from '@angular/common';
 })
 export class TableComponent {
 
-  dataSource = new MatTableDataSource<any>();
-
+  dataSource: User[] = [];
+  filteredDataSource: User[] = [];
+  displayedColumns: string[] = ['name', 'city', 'age', 'edit', 'delete'];
   constructor(private data: DataService, public dialog: MatDialog, private fireStoreDBService: FirestoreDbService){
 
   }
 
 
 
-  displayedColumns: string[] = ['name', 'city', 'age', 'edit', 'delete'];
-
-  ngOnInit(){
-
+  ngOnInit() {
     this.getEmpDetailsFromFireStore();
   }
 
-
-  getEmpDetailsFromFireStore(){
-    this.fireStoreDBService.getPeople().subscribe((dd:any)=>{
+  getEmpDetailsFromFireStore() {
+    this.fireStoreDBService.getPeople().subscribe((dd: User[]) => {
       console.log(dd);
-      this.dataSource= new MatTableDataSource<any>(dd)
-      this.dataSource.data= dd;
-    })
+      this.dataSource = dd;
+      this.filteredDataSource = [...this.dataSource];
+    });
   }
 
   redirectToAdd(): void {
@@ -68,8 +72,12 @@ export class TableComponent {
     });
   }
 
-  redirectToEdit(inp:any){
-    console.log(inp)
+  redirectToEdit(inp: string | undefined) {
+    if (!inp) {
+      console.error('Cannot edit user with undefined id');
+      return;
+    }
+    console.log(inp);
     const dialogRef = this.dialog.open(UserFormDialogComponent, {
       width: '350px',
       height: '400px',
@@ -79,49 +87,54 @@ export class TableComponent {
       }
     });
 
-    dialogRef.afterClosed().subscribe((data) => {
-      console.log(data)
-      if (data.clicked === 'submit') {
-        console.log('Sumbit button clicked');
-        console.log("input form data", data.userData.value)
-        this.fireStoreDBService.updatePeople(inp, data.userData.value).subscribe((data)=>{
-          console.log("user updated successfully")
+    dialogRef.afterClosed().subscribe((data: any) => {
+      console.log(data);
+      if (data?.clicked === 'submit' && data.userData?.value) {
+        console.log('Submit button clicked');
+        console.log("input form data", data.userData.value);
+        // Here we know inp is not undefined due to the check at the beginning of the method
+        this.fireStoreDBService.updatePeople(inp, data.userData.value).subscribe(() => {
+          console.log("user updated successfully");
           this.getEmpDetailsFromFireStore();
-        })
+        });
       }
     });
   }
 
-  redirectToDelete(inp:any){
+  redirectToDelete(inp: string | undefined) {
+    if (!inp) {
+      console.error('Cannot delete user with undefined id');
+      return;
+    }
     console.log('selected id', inp);
-    const ref: MatDialogRef<DeleteDialogComponent> = this.dialog.open(
-      DeleteDialogComponent,
-      {
-        width: '400px',
-        height: '210px',
-        data: {
-          message: 'Are you sure you want to delete user?',
-        },
-        backdropClass: 'confirmDialogComponent',
-        hasBackdrop: true,
-      }
-    );
-
-    ref.afterClosed().subscribe((data) => {
-      console.log(data);
-      if(data.clicked==="submit"){
-        this.fireStoreDBService.deletePeople(inp).subscribe((data)=>{
-          console.log("delete sucess");
-          this.getEmpDetailsFromFireStore();
-        })
-      }
-
+    const ref = this.dialog.open(DeleteDialogComponent, {
+      width: '400px',
+      height: '210px',
+      data: {
+        message: 'Are you sure you want to delete user?',
+      },
+      backdropClass: 'confirmDialogComponent',
+      hasBackdrop: true,
     });
 
+    ref.afterClosed().subscribe((data: any) => {
+      console.log(data);
+      if (data?.clicked === "submit") {
+        // Here we know inp is not undefined due to the check at the beginning of the method
+        this.fireStoreDBService.deletePeople(inp).subscribe(() => {
+          console.log("delete success");
+          this.getEmpDetailsFromFireStore();
+        });
+      }
+    });
   }
 
   applyFilter(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
+    this.filteredDataSource = this.dataSource.filter(user => 
+      user.name.toLowerCase().includes(filterValue) ||
+      user.city.toLowerCase().includes(filterValue) ||
+      user.age.toString().includes(filterValue)
+    );
   }
 }

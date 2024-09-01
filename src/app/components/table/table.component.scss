@@ -1,37 +1,60 @@
-.table-div{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 20px;
-}
-table {
-    width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-th.mat-header-cell {
-    text-align: left;
-    max-width: 300px;
-}
-
-tr{
-    background: var(--main-bg-color-1);
-    color: var(--primary-text-color);
+.table-container {
+  background-color: var(--main-bg-color-1);
+  color: var(--primary-text-color);
 }
 
 .search-input {
-    background-color: var(--main-bg-color-1);
-    color: var(--primary-text-color);
-    border-radius: 4px;
-    padding: 8px;
-  }
-  
-  .form-control::placeholder {
-    color: var(--primary-text-color);
-    opacity: 0.8;
-  }
-  
-  .form-control {
-    border-color: var(--primary-text-color);
-  }
+  background-color: var(--main-bg-color-1);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.form-control::placeholder {
+  color: var(--primary-text-color);
+}
+
+.form-control {
+  border-color: var(--border-color);
+}
+
+tr{
+  border-color: var(--border-color)
+}
+
+th,td{
+  background: var(--main-bg-color-1);
+  color: var(--primary-text-color);
+}
+
+.custom-table .btn-outline-primary,
+.custom-table .btn-outline-danger {
+  // color: var(--primary-text-color);
+  border-color: var(--primary-text-color);
+}
+
+.custom-table .btn-outline-primary:hover,
+.custom-table .btn-outline-danger:hover {
+  background-color: var(--primary-text-color);
+  color: var(--main-bg-color-1);
+}
+
+
+
+
+// .table-div{
+//     display: flex;
+//     flex-direction: column;
+//     padding-bottom: 20px;
+// }
+// table {
+//     width: 100%;
+//     overflow-x: auto;
+//     overflow-y: hidden;
+// }
+// th.mat-header-cell {
+//     text-align: left;
+//     max-width: 300px;
+// }
+
 
   

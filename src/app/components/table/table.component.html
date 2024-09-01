@@ -3,51 +3,47 @@
 
 </mat-toolbar>
 
-<div class="table-div">
-
-  <div class="mt-2 mb-2">
-    <button mat-raised-button color="primary" (click)="redirectToAdd()">Add User</button>
+<div class="table-container p-4">
+  <div class="row mt-3 mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="redirectToAdd()">Add User</button>
+    </div>
   </div>
-  <div class="form-group">
-    <input 
-      type="text" 
-      class="form-control search-input mb-2" 
-      placeholder="Search by name, city, or company" 
-      (input)="applyFilter($event)">
+  <div class="row mb-3">
+    <div class="col">
+      <input type="text" class="form-control search-input" placeholder="Search by name, city, or company"
+        (input)="applyFilter($event)">
+    </div>
   </div>
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef> city </th>
-      <td mat-cell *matCellDef="let element"> {{element.city}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="age">
-      <th mat-header-cell *matHeaderCellDef> age </th>
-      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef> edit </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon class="mat-18" style="cursor: pointer;" (click)="redirectToEdit(element.id)">edit</mat-icon>
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="delete">
-      <th mat-header-cell *matHeaderCellDef> Delete </th>
-      <td mat-cell *matCellDef="let element">
-        <mat-icon class="mat-18" style="cursor: pointer;" (click)="redirectToDelete(element.id)">delete</mat-icon>
-      </td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-hover custom-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>City</th>
+          <th>Age</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let element of filteredDataSource">
+          <td>{{element.name}}</td>
+          <td>{{element.city}}</td>
+          <td>{{element.age}}</td>
+          <td>
+            <button class="btn btn-sm btn-outline-primary" (click)="redirectToEdit(element.id)">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-outline-danger" (click)="redirectToDelete(element.id)">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-
