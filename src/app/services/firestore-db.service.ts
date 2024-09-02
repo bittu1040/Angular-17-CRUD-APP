@@ -7,6 +7,7 @@ export interface Person {
   name: string;
   age: number;
   city: string;
+  timestamp: string;
 }
 @Injectable({
   providedIn: 'root'

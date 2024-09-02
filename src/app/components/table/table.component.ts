@@ -8,31 +8,26 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { DataService } from '../../data.service';
 import { DeleteDialogComponent } from '../../dialogs/delete-dialog/delete-dialog.component';
 import { UserFormDialogComponent } from '../../dialogs/user-form-dialog/user-form-dialog.component';
-import { FirestoreDbService } from '../../services/firestore-db.service';
+import { FirestoreDbService, Person } from '../../services/firestore-db.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { NgFor } from '@angular/common';
+import { map } from 'rxjs/operators';
 
-interface User {
-  id?: string;
-  name: string;
-  city: string;
-  age: number;
-}
 
 @Component({
-    selector: 'app-table',
-    templateUrl: './table.component.html',
-    styleUrls: ['./table.component.scss'],
-    standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatTableModule, MatIconModule, ReactiveFormsModule, MatInputModule, NgFor]
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrls: ['./table.component.scss'],
+  standalone: true,
+  imports: [MatToolbarModule, MatButtonModule, MatTableModule, MatIconModule, ReactiveFormsModule, MatInputModule, NgFor]
 })
 export class TableComponent {
 
-  dataSource: User[] = [];
-  filteredDataSource: User[] = [];
-  displayedColumns: string[] = ['ID','name', 'city', 'age', 'edit', 'delete'];
-  constructor(private data: DataService, public dialog: MatDialog, private fireStoreDBService: FirestoreDbService){
+  dataSource: Person[] = [];
+  filteredDataSource: Person[] = [];
+  displayedColumns: string[] = ['ID', 'name', 'city', 'age', 'edit', 'delete'];
+  constructor(private data: DataService, public dialog: MatDialog, private fireStoreDBService: FirestoreDbService) {
 
   }
 
@@ -43,27 +38,36 @@ export class TableComponent {
   }
 
   getEmpDetailsFromFireStore() {
-    this.fireStoreDBService.getPeople().subscribe((dd: User[]) => {
-      console.log(dd);
-      this.dataSource = dd;
-      this.filteredDataSource = [...this.dataSource];
-    });
+    this.fireStoreDBService.getPeople()
+      .pipe(
+        map((users: Person[]) => {
+          return users.sort((a, b) => {
+            return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime();
+          });
+        })
+      )
+      .subscribe((sortedUsers: Person[]) => {
+        console.log(sortedUsers);
+        this.dataSource = sortedUsers;
+        this.filteredDataSource = [...this.dataSource];
+      });
   }
+
 
   redirectToAdd(): void {
     console.log("Add user dialog opened");
-  
+
     const dialogRef = this.dialog.open(UserFormDialogComponent, {
       width: '350px',
       height: '400px',
       data: { editDialog: false }
     });
-  
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result?.clicked === 'submit') {
         console.log('Submit button clicked');
         console.log("Input form data", result.userData.value);
-  
+
         this.fireStoreDBService.addPeople(result.userData.value).subscribe(() => {
           console.log("User added successfully");
           this.getEmpDetailsFromFireStore();
@@ -131,7 +135,7 @@ export class TableComponent {
 
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value.toLowerCase();
-    this.filteredDataSource = this.dataSource.filter(user => 
+    this.filteredDataSource = this.dataSource.filter(user =>
       user.name.toLowerCase().includes(filterValue) ||
       user.city.toLowerCase().includes(filterValue) ||
       user.age.toString().includes(filterValue)
