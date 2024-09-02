@@ -31,7 +31,7 @@ export class TableComponent {
 
   dataSource: User[] = [];
   filteredDataSource: User[] = [];
-  displayedColumns: string[] = ['name', 'city', 'age', 'edit', 'delete'];
+  displayedColumns: string[] = ['ID','name', 'city', 'age', 'edit', 'delete'];
   constructor(private data: DataService, public dialog: MatDialog, private fireStoreDBService: FirestoreDbService){
 
   }

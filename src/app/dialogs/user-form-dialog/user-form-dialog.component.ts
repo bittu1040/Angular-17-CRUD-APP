@@ -35,12 +35,14 @@ export class UserFormDialogComponent {
       name: ['', Validators.required],
       city: ['', Validators.required],
       age: ['', Validators.required],
+      timestamp: [new Date().toLocaleString()]
     });
 
     this.editUserForm= this.fb.group({
       name: [''],
       city:[''],
-      age: ['']
+      age: [''],
+      timestamp: [new Date().toLocaleString()]
     })
 
     this.getUserDataForEdit();
@@ -54,6 +56,9 @@ export class UserFormDialogComponent {
       allUserData.filter((data:any)=>{
         if(data.id===this.userId){
             this.editUserForm.patchValue(data);
+            this.editUserForm.patchValue({
+              timestamp: new Date().toLocaleString()
+            });
         }
     })
     })

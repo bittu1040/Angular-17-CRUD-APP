@@ -20,6 +20,7 @@
     <table class="table table-hover table-bordered custom-table">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Name</th>
           <th>City</th>
           <th>Age</th>
@@ -28,21 +29,24 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let element of filteredDataSource">
-          <td>{{element.name}}</td>
-          <td>{{element.city}}</td>
-          <td>{{element.age}}</td>
+        @for (item of filteredDataSource; track $index) {
+        <tr>
+          <td>{{$index+1}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.city}}</td>
+          <td>{{item.age}}</td>
           <td>
-            <button class="btn btn-sm btn-outline-primary" (click)="redirectToEdit(element.id)">
+            <button class="btn btn-sm btn-outline-primary" (click)="redirectToEdit(item.id)">
               <i class="fa-regular fa-pen-to-square"></i>
             </button>
           </td>
           <td>
-            <button class="btn btn-sm btn-outline-danger" (click)="redirectToDelete(element.id)">
+            <button class="btn btn-sm btn-outline-danger" (click)="redirectToDelete(item.id)">
               <i class="fas fa-trash-alt"></i>
             </button>
           </td>
         </tr>
+        }
       </tbody>
     </table>
   </div>
