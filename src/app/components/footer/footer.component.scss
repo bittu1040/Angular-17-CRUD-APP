@@ -6,6 +6,11 @@ footer {
     padding: 6px;
     margin-top: 10px;
   }
+
+  a{
+    color: var(--primary-text-color);
+    border-color: var(--primary-text-color);
+  }
   
   .copyright {
     font-size: 14px;
