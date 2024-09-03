@@ -64,32 +64,32 @@ export class TableComponent {
   redirectToAdd(): void {
 
     // use this once you need to add multiple dummy users
-    const test = {"name": "9thuser","age" : 12,"city": "test","timestamp": "9/2/2024, 5:20:33 PM"}
-    this.fireStoreDBService.addPeople(test).subscribe(() => {
-      console.log("User added successfully");
-      this.getEmpDetailsFromFireStore();
-    });
+    // const test = {"name": "9thuser","age" : 12,"city": "test","timestamp": "9/2/2024, 5:20:33 PM"}
+    // this.fireStoreDBService.addPeople(test).subscribe(() => {
+    //   console.log("User added successfully");
+    //   this.getEmpDetailsFromFireStore();
+    // });
 
 
     console.log("Add user dialog opened");
 
-    // const dialogRef = this.dialog.open(UserFormDialogComponent, {
-    //   width: '350px',
-    //   height: '400px',
-    //   data: { editDialog: false }
-    // });
+    const dialogRef = this.dialog.open(UserFormDialogComponent, {
+      width: '350px',
+      height: '400px',
+      data: { editDialog: false }
+    });
 
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result?.clicked === 'submit') {
-    //     console.log('Submit button clicked');
-    //     console.log("Input form data", result.userData.value);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result?.clicked === 'submit') {
+        console.log('Submit button clicked');
+        console.log("Input form data", result.userData.value);
 
-    //     this.fireStoreDBService.addPeople(result.userData.value).subscribe(() => {
-    //       console.log("User added successfully");
-    //       this.getEmpDetailsFromFireStore();
-    //     });
-    //   }
-    // });
+        this.fireStoreDBService.addPeople(result.userData.value).subscribe(() => {
+          console.log("User added successfully");
+          this.getEmpDetailsFromFireStore();
+        });
+      }
+    });
   }
 
   redirectToEdit(inp: string | undefined) {
