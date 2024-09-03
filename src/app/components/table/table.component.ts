@@ -11,8 +11,9 @@ import { UserFormDialogComponent } from '../../dialogs/user-form-dialog/user-for
 import { FirestoreDbService, Person } from '../../services/firestore-db.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { NgFor } from '@angular/common';
+import { NgFor, SlicePipe } from '@angular/common';
 import { map } from 'rxjs/operators';
+import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatTableModule, MatIconModule, ReactiveFormsModule, MatInputModule, NgFor]
+  imports: [MatToolbarModule, MatButtonModule, MatTableModule, MatIconModule, ReactiveFormsModule, MatInputModule, NgFor, NgbPagination, SlicePipe]
 })
 export class TableComponent {
 
@@ -29,7 +30,8 @@ export class TableComponent {
   displayedColumns: string[] = ['ID', 'name', 'city', 'age', 'edit', 'delete'];
 
   isLoading: boolean = true;
-
+  page=1;
+  pageSize=10;
 
   constructor(private data: DataService, public dialog: MatDialog, private fireStoreDBService: FirestoreDbService) {
 
@@ -62,32 +64,32 @@ export class TableComponent {
   redirectToAdd(): void {
 
     // use this once you need to add multiple dummy users
-    // const test = {"name": "9thuser","age" : 12,"city": "test","timestamp": "9/2/2024, 5:20:33 PM"}
-    // this.fireStoreDBService.addPeople(test).subscribe(() => {
-    //   console.log("User added successfully");
-    //   this.getEmpDetailsFromFireStore();
-    // });
+    const test = {"name": "9thuser","age" : 12,"city": "test","timestamp": "9/2/2024, 5:20:33 PM"}
+    this.fireStoreDBService.addPeople(test).subscribe(() => {
+      console.log("User added successfully");
+      this.getEmpDetailsFromFireStore();
+    });
 
 
     console.log("Add user dialog opened");
 
-    const dialogRef = this.dialog.open(UserFormDialogComponent, {
-      width: '350px',
-      height: '400px',
-      data: { editDialog: false }
-    });
+    // const dialogRef = this.dialog.open(UserFormDialogComponent, {
+    //   width: '350px',
+    //   height: '400px',
+    //   data: { editDialog: false }
+    // });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result?.clicked === 'submit') {
-        console.log('Submit button clicked');
-        console.log("Input form data", result.userData.value);
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   if (result?.clicked === 'submit') {
+    //     console.log('Submit button clicked');
+    //     console.log("Input form data", result.userData.value);
 
-        this.fireStoreDBService.addPeople(result.userData.value).subscribe(() => {
-          console.log("User added successfully");
-          this.getEmpDetailsFromFireStore();
-        });
-      }
-    });
+    //     this.fireStoreDBService.addPeople(result.userData.value).subscribe(() => {
+    //       console.log("User added successfully");
+    //       this.getEmpDetailsFromFireStore();
+    //     });
+    //   }
+    // });
   }
 
   redirectToEdit(inp: string | undefined) {

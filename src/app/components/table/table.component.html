@@ -41,9 +41,9 @@
       }
       @else if(filteredDataSource.length >0) {
       <tbody>
-        @for (item of filteredDataSource; track $index) {
+        @for (item of filteredDataSource | slice: (page-1) * pageSize : page * pageSize; track $index) {
         <tr>
-          <td>{{$index+1}}</td>
+          <td>{{(page - 1) * pageSize + $index + 1}}</td>
           <td>{{item.name}}</td>
           <td>{{item.city}}</td>
           <td>{{item.age}}</td>
@@ -72,5 +72,16 @@
       }
 
     </table>
+
+    <ngb-pagination
+    [collectionSize]="filteredDataSource.length"
+    [(page)]="page"
+    [pageSize]="pageSize"
+    [boundaryLinks]="true"
+    [maxSize]="4"
+    class="custom-pagination">
+  </ngb-pagination>
+  
+
   </div>
 </div>
