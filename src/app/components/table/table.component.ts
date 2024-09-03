@@ -27,6 +27,10 @@ export class TableComponent {
   dataSource: Person[] = [];
   filteredDataSource: Person[] = [];
   displayedColumns: string[] = ['ID', 'name', 'city', 'age', 'edit', 'delete'];
+
+  isLoading: boolean = true;
+
+
   constructor(private data: DataService, public dialog: MatDialog, private fireStoreDBService: FirestoreDbService) {
 
   }
@@ -50,6 +54,7 @@ export class TableComponent {
         console.log(sortedUsers);
         this.dataSource = sortedUsers;
         this.filteredDataSource = [...this.dataSource];
+        this.isLoading = false;
       });
   }
 

@@ -28,6 +28,18 @@
           <th>Delete</th>
         </tr>
       </thead>
+      @if (isLoading) {
+        <tbody>
+          <tr>
+            <td colspan="12" class="text-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      }
+      @else if(filteredDataSource.length >0) {
       <tbody>
         @for (item of filteredDataSource; track $index) {
         <tr>
@@ -48,6 +60,17 @@
         </tr>
         }
       </tbody>
+      }
+      @else {
+        <tbody>
+          <tr>
+            <td colspan="12" class="text-center">
+              <p class="text-muted">No data found</p>
+            </td>
+          </tr>
+        </tbody>
+      }
+
     </table>
   </div>
 </div>
