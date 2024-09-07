@@ -3,9 +3,50 @@
     color: var(--primary-text-color);
 }
 
+.search-input {
+    background-color: var(--main-bg-color-1);
+    border-radius: 4px;
+    padding: 8px;
+    border-color: var(--border-color);
+  }
+.search-input::placeholder {
+    color: var(--primary-text-color);
+}
+
+.profile-card{
+    background-color: var(--main-bg-color-1);
+    color: var(--primary-text-color);
+    border-color: var(--border-color);
+}
+
+.profile-button{
+    color: var(--primary-text-color);
+    border-color: var(--border-color);
+}
+
+.repo-card{
+    background-color: var(--main-bg-color-1);
+    color: var(--primary-text-color);
+    border-color: var(--border-color);
+}
+.repo-button{
+    color: var(--primary-text-color);
+    border-color: var(--border-color);
+}
+
+.select-repo{
+    background-color: var(--main-bg-color-1);
+    color: var(--primary-text-color);
+    border-color: var(--border-color);
+}
 
 
-
+@media (max-width: 576px) {
+    .select-repo-main{
+        display: flex;
+        flex-direction: column;
+    }
+}
 
 h1.responsive-text {
     font-size: 1.2rem; /* Base font size for larger screens */
