@@ -22,7 +22,7 @@ export class GithubUserComponent {
   constructor(private githubUserService: DataService) {} 
 
   ngOnInit(): void {
-    this.searchUser("bittu1040");
+    // this.searchUser("bittu1040");
   }
 
   searchUser(username: string) {
