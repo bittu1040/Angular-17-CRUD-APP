@@ -1,0 +1,29 @@
+h1.responsive-text {
+    font-size: 1.2rem; /* Base font size for larger screens */
+    font-weight: bold;
+}
+
+/* Small devices (phones, 576px and up) */
+@media (max-width: 576px) {
+    h1.responsive-text {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+}
+
+/* Extra small devices (phones, 460px and below) */
+@media (max-width: 460px) {
+
+    h1.responsive-text {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    p.responsive-text {
+        font-size: 0.875rem;
+    }
+
+    .btn-outline-primary {
+        font-size: 0.75rem;
+    }
+}

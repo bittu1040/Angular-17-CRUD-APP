@@ -16,8 +16,8 @@ export class DataService {
     return this.http.get<any>(`${this.baseUrl}${username}`);
   }
 
-  getUserRepos(username: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}${username}/repos`);
+  getUserRepos(username: string, perPage: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}${username}/repos?per_page=${perPage}`);
   }
 
 }
