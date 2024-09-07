@@ -1,6 +1,7 @@
 .github-user-container{
     background-color: var(--main-bg-color-1);
     color: var(--primary-text-color);
+    border-radius: 8px;
 }
 
 .search-input {
@@ -8,6 +9,7 @@
     border-radius: 4px;
     padding: 8px;
     border-color: var(--border-color);
+    color: var(--primary-text-color);
   }
 .search-input::placeholder {
     color: var(--primary-text-color);
@@ -37,6 +39,12 @@
 .select-repo{
     background-color: var(--main-bg-color-1);
     color: var(--primary-text-color);
+    border-color: var(--border-color);
+}
+
+.github-search-info{
+    background: purple;
+    color: white;
     border-color: var(--border-color);
 }
 

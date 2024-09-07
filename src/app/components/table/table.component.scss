@@ -1,12 +1,14 @@
 .table-container {
   background-color: var(--main-bg-color-1);
   color: var(--primary-text-color);
+  border-radius: 8px;
 }
 
 .search-input {
   background-color: var(--main-bg-color-1);
   border-radius: 4px;
   padding: 8px;
+  color: var(--primary-text-color);
 }
 
 .form-control::placeholder {
