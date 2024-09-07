@@ -1,3 +1,13 @@
+<!-- 
+If I click on search username: then url should be 
+                   http://your-angular-app-url/users/bittu1040 
+                   or 
+                   http://your-angular-app-url/?username=bittu1040
+
+Now if user opens directly this url then also functionality should work.
+-->
+
+
 <div class="github-user-container mt-4 p-4">
     <h2>Search GitHub User Profile</h2>
 
@@ -92,6 +102,14 @@
             </div>
         </div>
         }
+        <ngb-pagination
+        [(page)]="currentPage"
+        [collectionSize]="user.public_repos"
+        [pageSize]="reposPerPage"
+        [boundaryLinks]="true"
+        [size]="'sm'"
+        (pageChange)="onPageChange(currentPage)">
+      </ngb-pagination>
     }
     </div>
 </div>
