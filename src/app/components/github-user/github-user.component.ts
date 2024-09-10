@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { DataService } from '../../data.service';
 import { NgFor, SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-github-user',
@@ -12,6 +13,8 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './github-user.component.scss'
 })
 export class GithubUserComponent {
+
+  @ViewChild('usernameInput', { static: true }) usernameInput!: ElementRef;
 
   user: any = null;
   errorMessage: string = '';
@@ -24,7 +27,17 @@ export class GithubUserComponent {
 
   constructor(private githubUserService: DataService) {}
 
+  private router= inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe((params) => {
+      const username = params.get('username');
+      console.log(username);
+      if (username) {
+        this.usernameInput.nativeElement.value = username;
+        this.searchUser(username);
+      }
+    });
     // Example: You can call this to load a user initially
     // this.searchUser("bittu1040");
   }
@@ -34,6 +47,7 @@ export class GithubUserComponent {
     if (username) {
       this.isLoading = true;
       this.userName = username;
+      this.router.navigate(['/github-user', username]);
       this.githubUserService.getGithubUserDetails(this.userName).subscribe({
         next: (response: any) => {
           this.user = response;

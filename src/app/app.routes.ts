@@ -13,6 +13,7 @@ import { GithubUserComponent } from './components/github-user/github-user.compon
 export const routes: Routes = [
   {path:"", component: HomeComponent, pathMatch:"full"},
   {path:"home", component: HomeComponent},
+  {path: "github-user/:username", component: GithubUserComponent},
   {path: "github-user", component: GithubUserComponent},
   {path:"table", component: TableComponent, canActivate: [authGuard] },
   {path:"login", component: LoginComponent, canActivate: [authGuard]},
