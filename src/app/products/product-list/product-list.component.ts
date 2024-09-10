@@ -1,8 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgFor, SlicePipe } from '@angular/common';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -15,7 +16,7 @@ export class ProductListComponent implements OnInit {
   products: any[] = [];
   filteredProducts: any[] = [];
   categories: string[] = [];
-  selectedCategory: string = '';
+  selectedCategory: string = 'all';  // Default to 'all'
 
   constructor(
     private productService: ProductService,
@@ -25,7 +26,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     // Fetch products from the service
-    this.productService.getProducts().subscribe((data:any) => {
+    this.productService.getProducts().subscribe((data: any) => {
       this.products = data;
       this.filteredProducts = this.products;
 
@@ -34,17 +35,16 @@ export class ProductListComponent implements OnInit {
 
       // Check if category query param exists and filter accordingly
       this.route.queryParams.subscribe(params => {
-        const category = params['category'];
-        if (category) {
-          this.selectedCategory = category;
-          this.filterProductsByCategory(category);
-        }
+        console.log(params);
+        const category = params['category'] || 'all'; // Default to 'all' if not provided
+        this.selectedCategory = category;
+        this.filterProductsByCategory(category);
       });
     });
   }
 
   onCategoryChange(event: Event): void {
-    const selectedCategory = (event.target as HTMLSelectElement).value;
+    const selectedCategory = (event.target as HTMLSelectElement).value || 'all';
 
     // Update query params in the URL
     this.router.navigate([], {
@@ -58,10 +58,10 @@ export class ProductListComponent implements OnInit {
   }
 
   filterProductsByCategory(category: string): void {
-    if (category) {
-      this.filteredProducts = this.products.filter(product => product.category === category);
+    if (category === 'all') {
+      this.filteredProducts = this.products; // Show all products
     } else {
-      this.filteredProducts = this.products;
+      this.filteredProducts = this.products.filter(product => product.category === category);
     }
   }
 }
