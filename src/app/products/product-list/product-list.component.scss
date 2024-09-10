@@ -1,0 +1,16 @@
+.card-img-top {
+    width: 100%;
+    height: 200px; /* Set a fixed height */
+    object-fit: contain; /* or contain */
+    padding: 0.5rem;
+  }
+
+.router-card-body{
+    background: rgb(230, 230, 230);
+    border-radius: 6px;
+}
+
+.card:hover {
+    border: 1px solid #a09e9e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
