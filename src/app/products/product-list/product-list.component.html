@@ -1,5 +1,15 @@
+<div class="mb-3">
+  <label for="categorySelect" class="form-label">Select Category</label>
+  <select id="categorySelect" class="form-select" (change)="onCategoryChange($event)" [value]="selectedCategory">
+    <option value="" [selected]="selectedCategory === ''">All Categories</option>
+    <option *ngFor="let category of categories" [value]="category" [selected]="selectedCategory === category">
+      {{ category }}
+    </option>
+  </select>
+</div>
+
 <div class="row">
-    <div class="col-lg-3 col-md-4 mb-4" *ngFor="let product of products">
+    <div class="col-lg-3 col-md-4 mb-4" *ngFor="let product of filteredProducts">
       <div class="card h-100 shadow">
         <img [src]="product.image" class="card-img-top img-fluid" alt="{{ product.title }}">
         <div class="card-body router-card-body">
