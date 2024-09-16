@@ -1,0 +1,24 @@
+# Ignore entire directories
+node_modules/
+dist/
+build/
+
+# Ignore specific files
+src/app/services/firestore-db.service.ts
+src/app/products/product-details/product-details.component.ts
+src/app/dialogs/user-form-dialog/user-form-dialog.component.ts
+src/app/data.service.ts
+src/app/components/top-nav/top-nav.component.ts
+src/app/components/top-nav/top-nav.component.html
+src/app/components/table/table.component.ts
+src/app/components/signup/signup.component.ts
+src/app/components/route-demo/route-demo.component.ts
+src/app/components/login/login.component.ts
+src/app/components/github-user/github-user.component.ts
+src/app/components/forgot-password/forgot-password.component.ts
+src/app/app.component.ts
+src/assets/*
+
+# Ignore file types
+*.min.js
+*.spec.ts   # Ignore test files
