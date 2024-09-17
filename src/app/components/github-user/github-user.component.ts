@@ -10,10 +10,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [NgFor, SlicePipe, FormsModule, NgbPagination],
   templateUrl: './github-user.component.html',
-  styleUrl: './github-user.component.scss'
+  styleUrl: './github-user.component.scss',
 })
 export class GithubUserComponent {
-
   @ViewChild('usernameInput', { static: true }) usernameInput!: ElementRef;
 
   user: any = null;
@@ -21,13 +20,13 @@ export class GithubUserComponent {
   isLoading: boolean = false;
   userName: string = '';
   repositories: any[] = [];
-  reposPerPage: number = 10;     // Repos per page (default 10)
-  currentPage: number = 1;       // Current page number
-  totalRepos: number = 0;        // Total repositories (for pagination)
+  reposPerPage: number = 10; // Repos per page (default 10)
+  currentPage: number = 1; // Current page number
+  totalRepos: number = 0; // Total repositories (for pagination)
 
   constructor(private githubUserService: DataService) {}
 
-  private router= inject(Router);
+  private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((params) => {
@@ -54,14 +53,18 @@ export class GithubUserComponent {
           this.isLoading = false;
           this.errorMessage = '';
           this.totalRepos = response.public_repos; // Set total repos for pagination
-          this.getRepositories(this.userName, this.reposPerPage, this.currentPage); // Load first page of repos
+          this.getRepositories(
+            this.userName,
+            this.reposPerPage,
+            this.currentPage,
+          ); // Load first page of repos
         },
         error: (error) => {
           this.isLoading = false;
           this.errorMessage = 'User not found';
           this.user = null;
           this.repositories = [];
-        }
+        },
       });
     } else {
       this.errorMessage = 'Please enter a GitHub username';
@@ -82,14 +85,14 @@ export class GithubUserComponent {
         this.isLoading = false;
         this.errorMessage = 'Error fetching repositories';
         this.repositories = [];
-      }
+      },
     });
   }
 
   // Handle repos per page change
   onReposPerPageChange(event: any) {
     this.reposPerPage = event.target.value;
-    this.currentPage = 1;  // Reset to first page on perPage change
+    this.currentPage = 1; // Reset to first page on perPage change
     this.getRepositories(this.userName, this.reposPerPage, this.currentPage);
   }
 
@@ -99,4 +102,3 @@ export class GithubUserComponent {
     this.getRepositories(this.userName, this.reposPerPage, this.currentPage);
   }
 }
-

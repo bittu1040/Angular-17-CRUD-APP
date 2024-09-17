@@ -7,12 +7,8 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './route-demo.component.html',
-  styleUrl: './route-demo.component.scss'
+  styleUrl: './route-demo.component.scss',
 })
 export class RouteDemoComponent implements OnInit {
-
- 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

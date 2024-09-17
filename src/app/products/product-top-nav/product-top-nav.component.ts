@@ -5,8 +5,6 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './product-top-nav.component.html',
-  styleUrl: './product-top-nav.component.scss'
+  styleUrl: './product-top-nav.component.scss',
 })
-export class ProductTopNavComponent {
-
-}
+export class ProductTopNavComponent {}

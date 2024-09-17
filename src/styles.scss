@@ -1,32 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
 
-
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; 
-  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
-body{
+body {
   --primary-bg-color: rgb(0, 248, 248);
   --primary-text-color: rgb(0, 0, 0);
-  --main-bg-color: #F9F3F3;
+  --main-bg-color: #f9f3f3;
   --main-bg-color-1: rgb(219, 250, 250);
   --border-color: rgb(0, 0, 0, 0.1);
-  --background-gradient: radial-gradient(circle, rgba(171, 201, 201, 1) 0%, rgba(0, 255, 235, 1) 100%); // Gradient background
+  --background-gradient: radial-gradient(
+    circle,
+    rgba(171, 201, 201, 1) 0%,
+    rgba(0, 255, 235, 1) 100%
+  ); // Gradient background
   &.dark {
     --primary-bg-color: #222831;
     --primary-text-color: #ffd369;
     --main-bg-color: #393e46;
     --main-bg-color-1: #2f3134;
     --border-color: rgba(255, 255, 255, 0.2);
-    --background-gradient: radial-gradient(circle, rgba(60, 60, 60, 1) 0%, rgba(30, 30, 30, 1) 100%); // Gradient background for dark mode
+    --background-gradient: radial-gradient(
+      circle,
+      rgba(60, 60, 60, 1) 0%,
+      rgba(30, 30, 30, 1) 100%
+    ); // Gradient background for dark mode
   }
 }
 
 .auth-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,38 +16,44 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-forgot-password',
   standalone: true,
-  imports: [MatSnackBarModule,    
+  imports: [
+    MatSnackBarModule,
     ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterLink],
+    RouterLink,
+  ],
   templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.scss'
+  styleUrl: './forgot-password.component.scss',
 })
 export class ForgotPasswordComponent {
-
   forgotPasswordForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: FirebaseAuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
   ) {
     this.forgotPasswordForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.email]],
     });
   }
 
   onSubmit() {
     if (this.forgotPasswordForm.valid) {
       const email = this.forgotPasswordForm.get('email')?.value;
-      this.authService.forgotPassword(email)
+      this.authService
+        .forgotPassword(email)
         .then(() => {
-          this.snackBar.open('Password reset email sent. Check your inbox.', 'Close', {  duration: 5000});
+          this.snackBar.open(
+            'Password reset email sent. Check your inbox.',
+            'Close',
+            { duration: 5000 },
+          );
         })
-        .catch((error:any) => {
+        .catch((error: any) => {
           this.snackBar.open(`Error: ${error.message}`, 'Close', {
             duration: 5000,
           });
@@ -50,4 +61,3 @@ export class ForgotPasswordComponent {
     }
   }
 }
-

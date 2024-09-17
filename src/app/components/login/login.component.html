@@ -8,30 +8,53 @@
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" formControlName="email" required>
-            @if (loginForm.get('email')?.invalid && (loginForm.get('email')?.dirty || loginForm.get('email')?.touched))
-            {
-            <div class="text-danger">
-              Please enter a valid email
-            </div>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              required
+            />
+            @if (
+              loginForm.get('email')?.invalid &&
+              (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
+            ) {
+              <div class="text-danger">Please enter a valid email</div>
             }
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" formControlName="password" required>
-            @if (loginForm.get('password')?.invalid && (loginForm.get('password')?.dirty ||
-            loginForm.get('password')?.touched)) {
-            <div class="text-danger">
-              Password is required
-            </div>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              required
+            />
+            @if (
+              loginForm.get('password')?.invalid &&
+              (loginForm.get('password')?.dirty ||
+                loginForm.get('password')?.touched)
+            ) {
+              <div class="text-danger">Password is required</div>
             }
           </div>
-          <button type="submit" class="btn btn-primary w-100" [disabled]="loginForm.invalid">Login</button>
+          <button
+            type="submit"
+            class="btn btn-primary w-100"
+            [disabled]="loginForm.invalid"
+          >
+            Login
+          </button>
         </form>
       </div>
       <div class="card-footer">
-        <a routerLink="/signup" class="btn btn-link w-100">Not registered? Register here</a>
-        <a routerLink="/forgot-password" class="btn btn-link w-100">Forgot Password?</a>
+        <a routerLink="/signup" class="btn btn-link w-100"
+          >Not registered? Register here</a
+        >
+        <a routerLink="/forgot-password" class="btn btn-link w-100"
+          >Forgot Password?</a
+        >
       </div>
     </div>
   </div>

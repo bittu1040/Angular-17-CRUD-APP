@@ -12,24 +12,27 @@ import { RouteDemoComponent } from './components/route-demo/route-demo.component
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 
-
 export const routes: Routes = [
-  {path: "", component: HomeComponent, pathMatch:"full"},
-  {path: "home", component: HomeComponent},
-  {path: "github-user/:username", component: GithubUserComponent},
-  {path: "github-user", component: GithubUserComponent},
-  {path: "table", component: TableComponent, canActivate: [authGuard] },
-  {path: "route-demo", component: RouteDemoComponent,   
-    children: 
-      [
-       { path: "products", component: ProductListComponent, title: "Routing demo" },
-       { path: "products/:id", component: ProductDetailsComponent }
-      ]
+  { path: '', component: HomeComponent, pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'github-user/:username', component: GithubUserComponent },
+  { path: 'github-user', component: GithubUserComponent },
+  { path: 'table', component: TableComponent, canActivate: [authGuard] },
+  {
+    path: 'route-demo',
+    component: RouteDemoComponent,
+    children: [
+      {
+        path: 'products',
+        component: ProductListComponent,
+        title: 'Routing demo',
+      },
+      { path: 'products/:id', component: ProductDetailsComponent },
+    ],
   },
-  {path: "login", component: LoginComponent, canActivate: [authGuard]},
-  {path: "signup", component: SignupComponent},
-  {path: "forgot-password", component: ForgotPasswordComponent},
-  {path: "login-redirect", component: LoginRedirectsComponent},
-  {path: "**", component: PageNotFoundComponent}
-
+  { path: 'login', component: LoginComponent, canActivate: [authGuard] },
+  { path: 'signup', component: SignupComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'login-redirect', component: LoginRedirectsComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];

@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "eslint ./src --fix",
     "prepare": "husky install",
-    "lint:prettier": "prettier --write src/app/app.component.ts"
+    "lint:prettier": "prettier --write \"src/**/*.{html,scss,ts}\""
 
   },
   "private": true,

@@ -1,19 +1,30 @@
-<app-top-nav (sidenavToggle)="sidenav.toggle()">
-
-
-</app-top-nav>
+<app-top-nav (sidenavToggle)="sidenav.toggle()"> </app-top-nav>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [mode]="isMobile ? 'over' : 'side'" [opened]="isSideNavOpened">
+  <mat-sidenav
+    #sidenav
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isSideNavOpened"
+  >
     <mat-nav-list>
-      <mat-list-item routerLink="/home" > <div class="sidenavtext">Home </div> </mat-list-item>
-      <mat-list-item routerLink="/table" > <div class="sidenavtext"> Table </div></mat-list-item>
-      <mat-list-item routerLink="/github-user" > <div class="sidenavtext"> GitHub User </div></mat-list-item>
-      <mat-list-item routerLink="/route-demo/products" [queryParams]="{ category: 'all' }" > <div class="sidenavtext"> Router demo </div></mat-list-item>
+      <mat-list-item routerLink="/home">
+        <div class="sidenavtext">Home</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/table">
+        <div class="sidenavtext">Table</div></mat-list-item
+      >
+      <mat-list-item routerLink="/github-user">
+        <div class="sidenavtext">GitHub User</div></mat-list-item
+      >
+      <mat-list-item
+        routerLink="/route-demo/products"
+        [queryParams]="{ category: 'all' }"
+      >
+        <div class="sidenavtext">Router demo</div></mat-list-item
+      >
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-
     <div class="container">
       <router-outlet></router-outlet>
     </div>

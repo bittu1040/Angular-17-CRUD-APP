@@ -8,10 +8,9 @@ describe('GithubUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GithubUserComponent]
-    })
-    .compileComponents();
-    
+      imports: [GithubUserComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(GithubUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

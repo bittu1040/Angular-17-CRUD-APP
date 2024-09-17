@@ -10,21 +10,24 @@ export interface Person {
   timestamp: string;
 }
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FirestoreDbService {
-
   private collectionName = 'people';
   constructor(private firestore: AngularFirestore) {}
 
   getPeople(): Observable<Person[]> {
-    return this.firestore.collection<Person>(this.collectionName).valueChanges({ idField: 'id' });
+    return this.firestore
+      .collection<Person>(this.collectionName)
+      .valueChanges({ idField: 'id' });
   }
 
   // Add a new person to Firestore
   addPeople(person: Person): Observable<any> {
     return new Observable((observer) => {
-      this.firestore.collection(this.collectionName).add(person)
+      this.firestore
+        .collection(this.collectionName)
+        .add(person)
         .then(() => observer.next(person))
         .catch((error) => observer.error(error));
     });
@@ -33,7 +36,10 @@ export class FirestoreDbService {
   // Update an existing person's data in Firestore
   updatePeople(id: string, person: Person): Observable<any> {
     return new Observable((observer) => {
-      this.firestore.collection(this.collectionName).doc(id).update(person)
+      this.firestore
+        .collection(this.collectionName)
+        .doc(id)
+        .update(person)
         .then(() => observer.next(person))
         .catch((error) => observer.error(error));
     });
@@ -42,7 +48,10 @@ export class FirestoreDbService {
   // Delete a person from Firestore
   deletePeople(id: string): Observable<any> {
     return new Observable((observer) => {
-      this.firestore.collection(this.collectionName).doc(id).delete()
+      this.firestore
+        .collection(this.collectionName)
+        .doc(id)
+        .delete()
         .then(() => observer.next({ id }))
         .catch((error) => observer.error(error));
     });

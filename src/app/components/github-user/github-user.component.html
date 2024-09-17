@@ -7,109 +7,141 @@ If I click on search username: then url should be
 Now if user opens directly this url then also functionality should work.
 -->
 
-
 <div class="github-user-container mt-4 p-4">
-    <h2>Search GitHub User Profile</h2>
+  <h2>Search GitHub User Profile</h2>
 
-    <div class="row mb-3 d-flex justify-content-between">
-        <div class="col-8 col-md-8 ">
-            <input #usernameInput type="text" class="form-control search-input" placeholder="Enter GitHub username">
-        </div>
-        
-        <div class="col-4 col-md-3">
-           <div>
-            <button (click)="searchUser(usernameInput.value)" class="btn btn-primary w-100">Search</button>
-            </div>
-        </div>
+  <div class="row mb-3 d-flex justify-content-between">
+    <div class="col-8 col-md-8">
+      <input
+        #usernameInput
+        type="text"
+        class="form-control search-input"
+        placeholder="Enter GitHub username"
+      />
     </div>
 
-    <!-- User Profile -->
-    <div class="row">
-        <div class="col-md-12">
-            @if (user) {
-            <div class="card shadow-sm profile-card">
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <!-- Avatar -->
-                        <img [src]="user.avatar_url" alt="{{ user.name }}" class="rounded me-4" width="150"
-                            height="150">
-
-                        <!-- User Info -->
-                        <div>
-                            <h1 class="responsive-text">{{ user.name || 'No name available' }}</h1>
-                            <p class="responsive-text">{{ user.bio || 'No bio available' }}</p>
-                            <p class="responsive-text">
-                                <i class="bi bi-geo-alt"></i> {{ user.location || 'Location not available' }}
-                            </p>
-                            <a [href]="user.html_url" target="_blank" class="btn btn-outline-secondary responsive-text profile-button">View Profile</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            }
-
-            @else if (errorMessage) {
-            <div class="alert alert-danger">
-                {{ errorMessage }}
-            </div>
-            }
-
-            @else if (isLoading) {
-            <div class="text-center">
-                <div class="spinner-border" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
-            }
-
-            @else {
-            <div class="alert alert-info github-search-info">
-                Enter username to search for GitHub profile
-            </div>
-            }
-        </div>
+    <div class="col-4 col-md-3">
+      <div>
+        <button
+          (click)="searchUser(usernameInput.value)"
+          class="btn btn-primary w-100"
+        >
+          Search
+        </button>
+      </div>
     </div>
+  </div>
 
-    <!-- Repositories -->
+  <!-- User Profile -->
+  <div class="row">
+    <div class="col-md-12">
+      @if (user) {
+        <div class="card shadow-sm profile-card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <!-- Avatar -->
+              <img
+                [src]="user.avatar_url"
+                alt="{{ user.name }}"
+                class="rounded me-4"
+                width="150"
+                height="150"
+              />
 
-    <div class="row mt-3">
-        @if (repositories.length>0) {
-        <div class=" mb-2 col-12 d-flex justify-content-between align-items-center">
-            <h2>Repositories: {{ user.public_repos }}</h2>
-            <div class="select-repo-main">
-                <label for="reposPerPage" class="me-2">Repos per page:</label>
-                <select id="reposPerPage" class="form-select w-auto d-inline-block select-repo" [(ngModel)]="reposPerPage" (change)="onReposPerPageChange($event)">
-                  <option [value]="10">10</option>
-                  <option [value]="20">20</option>
-                  <option [value]="30">30</option>
-                  <option [value]="50">50</option>
-                  <option [value]="100">100</option>
-                </select>
+              <!-- User Info -->
+              <div>
+                <h1 class="responsive-text">
+                  {{ user.name || 'No name available' }}
+                </h1>
+                <p class="responsive-text">
+                  {{ user.bio || 'No bio available' }}
+                </p>
+                <p class="responsive-text">
+                  <i class="bi bi-geo-alt"></i>
+                  {{ user.location || 'Location not available' }}
+                </p>
+                <a
+                  [href]="user.html_url"
+                  target="_blank"
+                  class="btn btn-outline-secondary responsive-text profile-button"
+                  >View Profile</a
+                >
               </div>
-        </div>
-        @for (repo of repositories; track $index) {
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card mb-3 shadow-sm repo-card">
-                <div class="card-body">
-                    <h3>{{$index+1}} : {{ repo.name }}</h3>
-                    <!-- <p class="card-text">{{ repo.description || 'No description available' }}</p> -->
-                    <p class="card-text">
-                        <strong>Stars: <i class="bi bi-star"></i></strong> {{ repo.stargazers_count }} |
-                        <strong>Forks:</strong> {{ repo.forks_count }}
-                    </p>
-                    <a [href]="repo.html_url" target="_blank" class="btn btn-outline-secondary repo-button">View Repo</a>
-                </div>
             </div>
+          </div>
         </div>
-        }
-        <ngb-pagination
+      } @else if (errorMessage) {
+        <div class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+      } @else if (isLoading) {
+        <div class="text-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      } @else {
+        <div class="alert alert-info github-search-info">
+          Enter username to search for GitHub profile
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Repositories -->
+
+  <div class="row mt-3">
+    @if (repositories.length > 0) {
+      <div
+        class="mb-2 col-12 d-flex justify-content-between align-items-center"
+      >
+        <h2>Repositories: {{ user.public_repos }}</h2>
+        <div class="select-repo-main">
+          <label for="reposPerPage" class="me-2">Repos per page:</label>
+          <select
+            id="reposPerPage"
+            class="form-select w-auto d-inline-block select-repo"
+            [(ngModel)]="reposPerPage"
+            (change)="onReposPerPageChange($event)"
+          >
+            <option [value]="10">10</option>
+            <option [value]="20">20</option>
+            <option [value]="30">30</option>
+            <option [value]="50">50</option>
+            <option [value]="100">100</option>
+          </select>
+        </div>
+      </div>
+      @for (repo of repositories; track $index) {
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <div class="card mb-3 shadow-sm repo-card">
+            <div class="card-body">
+              <h3>{{ $index + 1 }} : {{ repo.name }}</h3>
+              <!-- <p class="card-text">{{ repo.description || 'No description available' }}</p> -->
+              <p class="card-text">
+                <strong>Stars: <i class="bi bi-star"></i></strong>
+                {{ repo.stargazers_count }} | <strong>Forks:</strong>
+                {{ repo.forks_count }}
+              </p>
+              <a
+                [href]="repo.html_url"
+                target="_blank"
+                class="btn btn-outline-secondary repo-button"
+                >View Repo</a
+              >
+            </div>
+          </div>
+        </div>
+      }
+      <ngb-pagination
         [(page)]="currentPage"
         [collectionSize]="user.public_repos"
         [pageSize]="reposPerPage"
         [boundaryLinks]="true"
         [size]="'sm'"
-        (pageChange)="onPageChange(currentPage)">
+        (pageChange)="onPageChange(currentPage)"
+      >
       </ngb-pagination>
     }
-    </div>
+  </div>
 </div>

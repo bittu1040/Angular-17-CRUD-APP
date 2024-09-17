@@ -7,15 +7,14 @@ import { ProductService } from '../../services/product.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.scss'
+  styleUrl: './product-details.component.scss',
 })
 export class ProductDetailsComponent {
-
   product: any;
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
   ) {}
 
   ngOnInit(): void {

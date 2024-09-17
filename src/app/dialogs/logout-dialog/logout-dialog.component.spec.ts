@@ -8,10 +8,9 @@ describe('LogoutDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LogoutDialogComponent]
-    })
-    .compileComponents();
-    
+      imports: [LogoutDialogComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(LogoutDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

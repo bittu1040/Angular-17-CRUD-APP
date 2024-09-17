@@ -1,116 +1,115 @@
-.github-user-container{
-    background-color: var(--main-bg-color-1);
-    color: var(--primary-text-color);
-    border-radius: 8px;
+.github-user-container {
+  background-color: var(--main-bg-color-1);
+  color: var(--primary-text-color);
+  border-radius: 8px;
 }
 
 .search-input {
-    background-color: var(--main-bg-color-1);
-    border-radius: 4px;
-    padding: 8px;
-    border-color: var(--border-color);
-    color: var(--primary-text-color);
-  }
+  background-color: var(--main-bg-color-1);
+  border-radius: 4px;
+  padding: 8px;
+  border-color: var(--border-color);
+  color: var(--primary-text-color);
+}
 .search-input::placeholder {
-    color: var(--primary-text-color);
+  color: var(--primary-text-color);
 }
 
-.profile-card{
-    background-color: var(--main-bg-color-1);
-    color: var(--primary-text-color);
-    border-color: var(--border-color);
+.profile-card {
+  background-color: var(--main-bg-color-1);
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
 }
 
-.profile-button{
-    color: var(--primary-text-color);
-    border-color: var(--border-color);
+.profile-button {
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
 }
 
-.repo-card{
-    background-color: var(--main-bg-color-1);
-    color: var(--primary-text-color);
-    border-color: var(--border-color);
+.repo-card {
+  background-color: var(--main-bg-color-1);
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
 }
-.repo-button{
-    color: var(--primary-text-color);
-    border-color: var(--border-color);
-}
-
-.select-repo{
-    background-color: var(--main-bg-color-1);
-    color: var(--primary-text-color);
-    border-color: var(--border-color);
+.repo-button {
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
 }
 
-.github-search-info{
-    background: purple;
-    color: white;
-    border-color: var(--border-color);
+.select-repo {
+  background-color: var(--main-bg-color-1);
+  color: var(--primary-text-color);
+  border-color: var(--border-color);
 }
 
-:host ::ng-deep .page-link{
-    color: var(--primary-text-color);
-    background: var(--main-bg-color-1);
-    border-color: var(--border-color);
-  }
-  
-  :host ::ng-deep .page-link{
-    color: var(--primary-text-color);
-    background: var(--main-bg-color-1);
-    border-color: var(--border-color);
-  }
-  
-  :host ::ng-deep .page-link {
-    color: var(--primary-text-color);
-    background: var(--main-bg-color-1);
-    border-color: var(--border-color);
-  }
-  
-  :host ::ng-deep .page-link:hover {
-    color: var(--main-bg-color-1); 
-    background: var(--primary-text-color);
-    border-color: var(--primary-text-color);
-  }
-  
-  :host ::ng-deep .page-item.active .page-link {
-    color: var(--main-bg-color-1);
-    background: var(--primary-text-color); 
-    border-color: var(--primary-text-color);
-  }
+.github-search-info {
+  background: purple;
+  color: white;
+  border-color: var(--border-color);
+}
+
+:host ::ng-deep .page-link {
+  color: var(--primary-text-color);
+  background: var(--main-bg-color-1);
+  border-color: var(--border-color);
+}
+
+:host ::ng-deep .page-link {
+  color: var(--primary-text-color);
+  background: var(--main-bg-color-1);
+  border-color: var(--border-color);
+}
+
+:host ::ng-deep .page-link {
+  color: var(--primary-text-color);
+  background: var(--main-bg-color-1);
+  border-color: var(--border-color);
+}
+
+:host ::ng-deep .page-link:hover {
+  color: var(--main-bg-color-1);
+  background: var(--primary-text-color);
+  border-color: var(--primary-text-color);
+}
+
+:host ::ng-deep .page-item.active .page-link {
+  color: var(--main-bg-color-1);
+  background: var(--primary-text-color);
+  border-color: var(--primary-text-color);
+}
 
 @media (max-width: 576px) {
-    .select-repo-main{
-        display: flex;
-        flex-direction: column;
-    }
+  .select-repo-main {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 h1.responsive-text {
-    font-size: 1.2rem; /* Base font size for larger screens */
-    font-weight: bold;
+  font-size: 1.2rem; /* Base font size for larger screens */
+  font-weight: bold;
 }
 
 /* Small devices (phones, 576px and up) */
 @media (max-width: 576px) {
-    h1.responsive-text {
-        font-size: 1rem;
-        font-weight: bold;
-    }
+  h1.responsive-text {
+    font-size: 1rem;
+    font-weight: bold;
+  }
 }
 
 /* Extra small devices (phones, 460px and below) */
 @media (max-width: 460px) {
+  h1.responsive-text {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
 
-    h1.responsive-text {
-        font-size: 1.25rem;
-        font-weight: bold;
-    }
+  p.responsive-text {
+    font-size: 0.875rem;
+  }
 
-    p.responsive-text {
-        font-size: 0.875rem;
-    }
-
-    .btn-outline-primary {
-        font-size: 0.75rem;
-    }
+  .btn-outline-primary {
+    font-size: 0.75rem;
+  }
 }

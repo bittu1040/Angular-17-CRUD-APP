@@ -1,42 +1,41 @@
-
-.card-body{
+.card-body {
+  background: var(--main-bg-color-1);
+  color: var(--primary-text-color);
+  ul,
+  li {
     background: var(--main-bg-color-1);
     color: var(--primary-text-color);
-    ul, li {
-        background: var(--main-bg-color-1);
-        color: var(--primary-text-color);
-      }
+  }
 }
 
-ul{
-    font-size: medium;
+ul {
+  font-size: medium;
 }
-
 
 .card {
-    border-radius: 0;
+  border-radius: 0;
 }
 
-.list-group-item{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+.list-group-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
-.implemented{
-    i{
-        color: green
-    }
+.implemented {
+  i {
+    color: green;
+  }
 }
 
-.not-implemented{
-    i{
-        color: red
-    }
+.not-implemented {
+  i {
+    color: red;
+  }
 }
 
-.ongoing{
-    i{
-        color: orange
-    }
+.ongoing {
+  i {
+    color: orange;
+  }
 }

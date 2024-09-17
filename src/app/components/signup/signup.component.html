@@ -8,35 +8,64 @@
         <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
           <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" formControlName="email" required>
-            @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
-            <div class="text-danger">
-              Please enter a valid email
-            </div>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              required
+            />
+            @if (
+              signupForm.get('email')?.invalid &&
+              signupForm.get('email')?.touched
+            ) {
+              <div class="text-danger">Please enter a valid email</div>
             }
           </div>
 
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" formControlName="password" required>
-            @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
-            <div class="text-danger">
-              Password should be at least 6 characters.
-            </div>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              formControlName="password"
+              required
+            />
+            @if (
+              signupForm.get('password')?.invalid &&
+              signupForm.get('password')?.touched
+            ) {
+              <div class="text-danger">
+                Password should be at least 6 characters.
+              </div>
             }
           </div>
 
           <div class="mb-3">
-            <label for="confirmPassword" class="form-label">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" required>
-            @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
-            <div class="text-danger">
-              Password is not matching
-            </div>
+            <label for="confirmPassword" class="form-label"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              required
+            />
+            @if (
+              signupForm.hasError('passwordMismatch') &&
+              signupForm.get('confirmPassword')?.touched
+            ) {
+              <div class="text-danger">Password is not matching</div>
             }
           </div>
 
-          <button class="btn btn-primary w-100" type="submit" [disabled]="signupForm.invalid">
+          <button
+            class="btn btn-primary w-100"
+            type="submit"
+            [disabled]="signupForm.invalid"
+          >
             Sign Up
           </button>
         </form>
@@ -50,14 +79,13 @@
   </div>
 </div>
 
-
-          <!-- 
+<!-- 
             currently here custom validation is working if i use div tag outside form tag.
             but not working as expected with mat-error: 
             So we need to fix that in mat-error
           -->
 
-            <!-- @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
+<!-- @if (signupForm.hasError('passwordMismatch') && (signupForm.get('confirmPassword')?.touched)) {
         <div class="cross-validation-error-message alert alert-danger">
           password is not matching
          </div>

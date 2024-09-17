@@ -1,21 +1,36 @@
 <div class="mb-3">
   <label for="categorySelect" class="form-label">Select Category</label>
-  <select id="categorySelect" class="form-select" (change)="onCategoryChange($event)" [value]="selectedCategory">
+  <select
+    id="categorySelect"
+    class="form-select"
+    (change)="onCategoryChange($event)"
+    [value]="selectedCategory"
+  >
     <option value="all">All Categories</option>
-    <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    <option *ngFor="let category of categories" [value]="category">
+      {{ category }}
+    </option>
   </select>
 </div>
 
 <div class="row">
-    <div class="col-lg-3 col-md-4 mb-4" *ngFor="let product of filteredProducts">
-      <div class="card h-100 shadow">
-        <img [src]="product.image" class="card-img-top img-fluid" alt="{{ product.title }}">
-        <div class="card-body router-card-body">
-          <h3>{{ product.title | slice:0:25 }}</h3>
-          <p class="card-text">{{ product.description | slice:0:25 }}...</p>
-          <p class="card-text">Price: ${{ product.price }}</p>
-          <a [routerLink]="['/route-demo/products', product.id]" class="btn btn-primary">View Details</a>
-        </div>
+  <div class="col-lg-3 col-md-4 mb-4" *ngFor="let product of filteredProducts">
+    <div class="card h-100 shadow">
+      <img
+        [src]="product.image"
+        class="card-img-top img-fluid"
+        alt="{{ product.title }}"
+      />
+      <div class="card-body router-card-body">
+        <h3>{{ product.title | slice: 0 : 25 }}</h3>
+        <p class="card-text">{{ product.description | slice: 0 : 25 }}...</p>
+        <p class="card-text">Price: ${{ product.price }}</p>
+        <a
+          [routerLink]="['/route-demo/products', product.id]"
+          class="btn btn-primary"
+          >View Details</a
+        >
       </div>
     </div>
+  </div>
 </div>

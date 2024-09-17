@@ -19,11 +19,12 @@
   border-color: var(--border-color);
 }
 
-tr{
-  border-color: var(--border-color)
+tr {
+  border-color: var(--border-color);
 }
 
-th,td{
+th,
+td {
   background: var(--main-bg-color-1);
   color: var(--primary-text-color);
 }
@@ -40,13 +41,13 @@ th,td{
   color: var(--main-bg-color-1);
 }
 
-:host ::ng-deep .page-link{
+:host ::ng-deep .page-link {
   color: var(--primary-text-color);
   background: var(--main-bg-color-1);
   border-color: var(--border-color);
 }
 
-:host ::ng-deep .page-link{
+:host ::ng-deep .page-link {
   color: var(--primary-text-color);
   background: var(--main-bg-color-1);
   border-color: var(--border-color);
@@ -59,18 +60,16 @@ th,td{
 }
 
 :host ::ng-deep .page-link:hover {
-  color: var(--main-bg-color-1); 
+  color: var(--main-bg-color-1);
   background: var(--primary-text-color);
   border-color: var(--primary-text-color);
 }
 
 :host ::ng-deep .page-item.active .page-link {
   color: var(--main-bg-color-1);
-  background: var(--primary-text-color); 
+  background: var(--primary-text-color);
   border-color: var(--primary-text-color);
 }
-
-
 
 // .table-div{
 //     display: flex;
@@ -86,6 +85,3 @@ th,td{
 //     text-align: left;
 //     max-width: 300px;
 // }
-
-
-  

@@ -8,8 +8,8 @@ describe('TopNavComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [TopNavComponent]
-});
+      imports: [TopNavComponent],
+    });
     fixture = TestBed.createComponent(TopNavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

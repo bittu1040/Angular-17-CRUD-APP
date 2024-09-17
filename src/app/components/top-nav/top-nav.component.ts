@@ -3,31 +3,43 @@ import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatMenuModule} from '@angular/material/menu';
-import { NgClass, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { MatMenuModule } from '@angular/material/menu';
+import {
+  NgClass,
+  SlicePipe,
+  TitleCasePipe,
+  UpperCasePipe,
+} from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
-    selector: 'app-top-nav',
-    templateUrl: './top-nav.component.html',
-    styleUrls: ['./top-nav.component.scss'],
-    standalone: true,
-    imports: [MatToolbarModule, MatButtonModule, MatIconModule, RouterLink, MatMenuModule, SlicePipe, MatSlideToggleModule, NgClass, TitleCasePipe]
+  selector: 'app-top-nav',
+  templateUrl: './top-nav.component.html',
+  styleUrls: ['./top-nav.component.scss'],
+  standalone: true,
+  imports: [
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    RouterLink,
+    MatMenuModule,
+    SlicePipe,
+    MatSlideToggleModule,
+    NgClass,
+    TitleCasePipe,
+  ],
 })
-export class TopNavComponent implements OnInit{
-
-  isDarkTheme=false;
+export class TopNavComponent implements OnInit {
+  isDarkTheme = false;
   @Output() sidenavToggle = new EventEmitter<void>();
   public dialog = inject(MatDialog);
   public authService = inject(FirebaseAuthService);
 
   username = this.authService.getUsername();
   isLoggedIn = this.authService.IsLoggedIn();
-
-
 
   ngOnInit(): void {
     this.initializeTheme();
@@ -45,17 +57,17 @@ export class TopNavComponent implements OnInit{
     }
     localStorage.setItem('dark-theme', JSON.stringify(this.isDarkTheme));
   }
-  
+
   initializeTheme() {
     const savedTheme = localStorage.getItem('dark-theme');
-    console.log("dark", savedTheme);
-  
+    console.log('dark', savedTheme);
+
     if (savedTheme !== null) {
       this.isDarkTheme = JSON.parse(savedTheme);
     } else {
       this.isDarkTheme = false;
     }
-  
+
     if (this.isDarkTheme) {
       document.body.classList.add('dark');
     } else {

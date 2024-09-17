@@ -4,15 +4,14 @@
   background: var(--background-gradient);
 }
 
-.text, a{
+.text,
+a {
   color: var(--primary-text-color);
-
 }
 
-.user-profile{
+.user-profile {
   background: var(--primary-bg-color);
 }
-
 
 @media only screen and (max-width: 460px) {
   mat-toolbar {
@@ -26,41 +25,36 @@
     justify-content: flex-end;
   }
 
-
   .home,
   .table_example,
   .contribute {
     display: none;
   }
-
 }
 
 @media only screen and (min-width: 601px) {
-
   .toolbar-buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
   }
-
 }
-
 
 .user_menu {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.link-style{
+.link-style {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.link-style:hover{
+.link-style:hover {
   background: rgb(209, 209, 209);
 }
 
-i{
+i {
   font-size: 20px;
 }

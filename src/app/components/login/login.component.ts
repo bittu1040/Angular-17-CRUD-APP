@@ -25,7 +25,7 @@ import { AUTH_ERRORS } from '../../shared/error-constants';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -42,9 +42,8 @@ export class LoginComponent implements OnInit {
     private firebaseAuth: FirebaseAuthService,
     private router: Router,
     private fb: FormBuilder,
-    private toastService: NgToastService
-  ) {
-  }
+    private toastService: NgToastService,
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -61,7 +60,7 @@ export class LoginComponent implements OnInit {
       .then((data) => {
         this.toastService.success('Login successful', 'LOGIN SUCCESS', 4000);
         this.router.navigateByUrl('/home');
-        console.log("login success")
+        console.log('login success');
         const user = data.user;
         if (user) {
           this.username = user.displayName || user.email;
@@ -69,13 +68,16 @@ export class LoginComponent implements OnInit {
         }
       })
       .catch(({ code }) => {
-        console.log("login error")
+        console.log('login error');
         this.loginError = this.getErrorMessage(code);
         this.toastService.danger(this.loginError, 'LOGIN ERROR', 4000);
       });
   }
 
   getErrorMessage(errorCode: string): string {
-    return this.authErrors[errorCode] || 'An unknown error occurred. Please try again.';
+    return (
+      this.authErrors[errorCode] ||
+      'An unknown error occurred. Please try again.'
+    );
   }
 }

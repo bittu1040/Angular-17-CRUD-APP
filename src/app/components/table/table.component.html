@@ -2,13 +2,19 @@
   <h2>Employee Dashboard</h2>
   <div class="row mb-3">
     <div class="col">
-      <button class="btn btn-primary" (click)="redirectToAdd()">Add User</button>
+      <button class="btn btn-primary" (click)="redirectToAdd()">
+        Add User
+      </button>
     </div>
   </div>
   <div class="row mb-3">
     <div class="col">
-      <input type="text" class="form-control search-input" placeholder="Search by name, city, or company"
-        (input)="applyFilter($event)">
+      <input
+        type="text"
+        class="form-control search-input"
+        placeholder="Search by name, city, or company"
+        (input)="applyFilter($event)"
+      />
     </div>
   </div>
 
@@ -34,30 +40,38 @@
             </td>
           </tr>
         </tbody>
-      }
-      @else if(filteredDataSource.length >0) {
-      <tbody>
-        @for (item of filteredDataSource | slice: (page-1) * pageSize : page * pageSize; track $index) {
-        <tr>
-          <td>{{(page - 1) * pageSize + $index + 1}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.city}}</td>
-          <td>{{item.age}}</td>
-          <td>
-            <button class="btn btn-sm btn-outline-primary" (click)="redirectToEdit(item.id)">
-              <i class="fa-regular fa-pen-to-square"></i>
-            </button>
-          </td>
-          <td>
-            <button class="btn btn-sm btn-outline-danger" (click)="redirectToDelete(item.id)">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </td>
-        </tr>
-        }
-      </tbody>
-      }
-      @else {
+      } @else if (filteredDataSource.length > 0) {
+        <tbody>
+          @for (
+            item of filteredDataSource
+              | slice: (page - 1) * pageSize : page * pageSize;
+            track $index
+          ) {
+            <tr>
+              <td>{{ (page - 1) * pageSize + $index + 1 }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.city }}</td>
+              <td>{{ item.age }}</td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="redirectToEdit(item.id)"
+                >
+                  <i class="fa-regular fa-pen-to-square"></i>
+                </button>
+              </td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="redirectToDelete(item.id)"
+                >
+                  <i class="fas fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      } @else {
         <tbody>
           <tr>
             <td colspan="12" class="text-center">
@@ -66,19 +80,17 @@
           </tr>
         </tbody>
       }
-
     </table>
 
     <ngb-pagination
-    [collectionSize]="filteredDataSource.length"
-    [(page)]="page"
-    [pageSize]="pageSize"
-    [boundaryLinks]="true"
-    [maxSize]="4"
-    class="custom-pagination"
-    size="sm">
-  </ngb-pagination>
-  
-
+      [collectionSize]="filteredDataSource.length"
+      [(page)]="page"
+      [pageSize]="pageSize"
+      [boundaryLinks]="true"
+      [maxSize]="4"
+      class="custom-pagination"
+      size="sm"
+    >
+    </ngb-pagination>
   </div>
 </div>

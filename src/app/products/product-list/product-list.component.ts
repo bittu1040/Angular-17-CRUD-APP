@@ -1,6 +1,5 @@
 /* eslint-disable */
 
-
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,18 +12,18 @@ import { RouterLink } from '@angular/router';
   standalone: true,
   imports: [NgFor, SlicePipe, RouterLink, FormsModule],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.scss'
+  styleUrl: './product-list.component.scss',
 })
 export class ProductListComponent implements OnInit {
   products: any[] = [];
   filteredProducts: any[] = [];
   categories: string[] = [];
-  selectedCategory: string = 'all';  // Default to 'all'
+  selectedCategory: string = 'all'; // Default to 'all'
 
   constructor(
     private productService: ProductService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -34,10 +33,12 @@ export class ProductListComponent implements OnInit {
       this.filteredProducts = this.products;
 
       // Extract unique categories from the product list
-      this.categories = [...new Set(this.products.map(product => product.category))];
+      this.categories = [
+        ...new Set(this.products.map((product) => product.category)),
+      ];
 
       // Check if category query param exists and filter accordingly
-      this.route.queryParams.subscribe(params => {
+      this.route.queryParams.subscribe((params) => {
         console.log(params);
         const category = params['category'] || 'all'; // Default to 'all' if not provided
         this.selectedCategory = category;
@@ -53,7 +54,7 @@ export class ProductListComponent implements OnInit {
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { category: selectedCategory },
-      queryParamsHandling: 'merge' // Merge with other query params if any
+      queryParamsHandling: 'merge', // Merge with other query params if any
     });
 
     // Filter products based on selected category
@@ -64,7 +65,9 @@ export class ProductListComponent implements OnInit {
     if (category === 'all') {
       this.filteredProducts = this.products; // Show all products
     } else {
-      this.filteredProducts = this.products.filter(product => product.category === category);
+      this.filteredProducts = this.products.filter(
+        (product) => product.category === category,
+      );
     }
   }
 }

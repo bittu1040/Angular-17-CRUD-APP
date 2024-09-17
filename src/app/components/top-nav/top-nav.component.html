@@ -1,21 +1,35 @@
-<mat-toolbar style="justify-content: space-between;">
-  <div style="display: flex; align-items: center;">
-    <button mat-icon-button class="example-icon" (click)="toggleSidenav()" id="menu-button">
+<mat-toolbar style="justify-content: space-between">
+  <div style="display: flex; align-items: center">
+    <button
+      mat-icon-button
+      class="example-icon"
+      (click)="toggleSidenav()"
+      id="menu-button"
+    >
       <mat-icon>menu</mat-icon>
     </button>
     <div routerLink="/">Angular 17</div>
   </div>
-  <div style="display: flex; align-items: center;">
+  <div style="display: flex; align-items: center">
     <div class="toolbar-buttons">
       <a class="btn home" routerLink="/home">Home</a>
       <a class="btn table_example" routerLink="/table">Table</a>
-      <a class="btn user_menu" id="dropdownMenuLink" data-bs-toggle="dropdown" data-bs-auto-close="outside">
+      <a
+        class="btn user_menu"
+        id="dropdownMenuLink"
+        data-bs-toggle="dropdown"
+        data-bs-auto-close="outside"
+      >
         <i class="fa-solid fa-user-circle"></i>
       </a>
       <ul class="dropdown-menu user-profile" aria-labelledby="dropdownMenuLink">
         <li>
           <a class="dropdown-item link-style">
-            <i [ngClass]="isDarkTheme ? 'fa-solid fa-moon me-3' : 'fa-solid fa-sun me-3'"></i>
+            <i
+              [ngClass]="
+                isDarkTheme ? 'fa-solid fa-moon me-3' : 'fa-solid fa-sun me-3'
+              "
+            ></i>
             <mat-slide-toggle (change)="toggleTheme()"></mat-slide-toggle>
           </a>
         </li>
@@ -25,32 +39,36 @@
             <span>Language</span>
           </a>
         </li>
-        @if(username()){
+        @if (username()) {
+          <li>
+            <a class="dropdown-item link-style">
+              <i class="fa-solid fa-person me-4"></i>
+              <span>{{ username() | slice: 0 : 5 | titlecase }}</span>
+            </a>
+          </li>
+        }
+        @if (!isLoggedIn()) {
+          <li>
+            <a class="dropdown-item link-style" routerLink="/login">
+              <i class="fa-solid fa-right-to-bracket me-3"></i>
+              <span>Login</span>
+            </a>
+          </li>
+        }
+        @if (isLoggedIn()) {
+          <li>
+            <a class="dropdown-item link-style" (click)="openLogoutDialog()">
+              <i class="fa-solid fa-right-from-bracket me-3"></i>
+              <span>Logout</span>
+            </a>
+          </li>
+        }
         <li>
-          <a class="dropdown-item link-style">
-            <i class="fa-solid fa-person me-4"></i>
-            <span>{{username() | slice: 0 : 5 | titlecase}}</span>
-          </a>
-        </li>
-      }
-      @if(!isLoggedIn()){
-        <li>
-          <a class="dropdown-item link-style" routerLink="/login">
-            <i class="fa-solid fa-right-to-bracket me-3"></i>
-            <span>Login</span>
-          </a>
-        </li>
-      }
-      @if(isLoggedIn()){
-        <li>
-          <a class="dropdown-item link-style" (click)="openLogoutDialog()">
-            <i class="fa-solid fa-right-from-bracket me-3"></i>
-            <span>Logout</span>
-          </a>
-        </li>
-      }
-        <li>
-          <a class="link-style dropdown-item" href="https://github.com/bittu1040/Angular-17-CRUD-APP" target="_blank">
+          <a
+            class="link-style dropdown-item"
+            href="https://github.com/bittu1040/Angular-17-CRUD-APP"
+            target="_blank"
+          >
             <i class="fa-brands fa-github me-3"></i>
             <span>Contribute</span>
           </a>

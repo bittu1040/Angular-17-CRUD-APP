@@ -26,7 +26,7 @@ import { NgToastService } from 'ng-angular-popup';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -40,18 +40,20 @@ export class SignupComponent {
     private fb: FormBuilder,
     private firebaseAuth: FirebaseAuthService,
     private router: Router,
-    private toastService: NgToastService
-  ) {
-  }
+    private toastService: NgToastService,
+  ) {}
 
   ngOnInit() {
     this.signupForm = this.fb.group(
       {
-        email: ['', Validators.compose([Validators.required, Validators.email])],
+        email: [
+          '',
+          Validators.compose([Validators.required, Validators.email]),
+        ],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
       },
-      { validator: this.passwordMatchValidator }
+      { validator: this.passwordMatchValidator },
     );
   }
 
@@ -71,7 +73,7 @@ export class SignupComponent {
     const confirmPassword = control.get('confirmPassword');
 
     // return null if password is invalid
-    if(password?.invalid) return null;
+    if (password?.invalid) return null;
 
     // check if password/confirmed password mached
     // if not matched then return error
@@ -93,7 +95,11 @@ export class SignupComponent {
         .register(this.signupForm.value.email, this.signupForm.value.password)
         .then((data) => {
           console.log('register success', data);
-          this.toastService.success('User created successfully', 'SIGNUP SUCCESS', 4000);
+          this.toastService.success(
+            'User created successfully',
+            'SIGNUP SUCCESS',
+            4000,
+          );
           this.router.navigate(['/login']);
         })
         .catch((error) => {
@@ -105,6 +111,9 @@ export class SignupComponent {
   }
 
   getErrorMessage(errorCode: string): string {
-    return this.authErrors[errorCode] || 'An unknown error occurred. Please try again.';
+    return (
+      this.authErrors[errorCode] ||
+      'An unknown error occurred. Please try again.'
+    );
   }
 }
