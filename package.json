@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "eslint ./src --fix",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
@@ -49,6 +50,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "husky": "^8.0.0"
   }
 }
