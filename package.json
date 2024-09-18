@@ -10,7 +10,6 @@
     "lint": "eslint ./src --fix",
     "prepare": "husky install",
     "lint:prettier": "prettier --write \"src/**/*.{html,scss,ts}\""
-
   },
   "private": true,
   "dependencies": {
@@ -27,6 +26,8 @@
     "@angular/router": "^17.0.0",
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "@ngx-translate/core": "^15.0.0",
+    "@ngx-translate/http-loader": "^8.0.0",
     "bootstrap": "^5.3.3",
     "ng-angular-popup": "^0.6.2",
     "rxjs": "~7.8.0",
@@ -46,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "7.11.0",
     "@typescript-eslint/parser": "7.11.0",
     "eslint": "^8.57.0",
+    "husky": "^8.0.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -53,7 +55,6 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "prettier": "^3.3.3",
-    "typescript": "~5.2.2",
-    "husky": "^8.0.0"
+    "typescript": "~5.2.2"
   }
 }

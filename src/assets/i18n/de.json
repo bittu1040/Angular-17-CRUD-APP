@@ -1,0 +1,33 @@
+{
+    "sidenav": {
+      "home": "Startseite",
+      "table": "Tabelle",
+      "github_user": "GitHub Benutzer",
+      "router_demo": "Router Demo"
+    },
+    "homecomponent": {
+      "title": "Was kommt als Nächstes?",
+      "subtitle": "Das plane ich als nächstes zu tun:",
+      "user_auth": "Implementierung des Benutzerauthentifizierungssystems mit Firebase (Anmelden, Abmelden, Registrieren, Passwort vergessen)",
+      "auth_guard": "Implementiere Route/Auth Guard",
+      "crud_operation": "CRUD-Operation in der Tabelle mit Firebase",
+      "reusable_table": "Wiederverwendbare Tabelle mit Sortier-, Such- und Paginierungsfunktion",
+      "unit_tests": "Schreibe Komponententests",
+      "theme_switcher": "Implementiere Umschalter für helles/dunkles Thema",
+      "multilingual_support": "Mehrsprachige Unterstützung implementieren",
+      "pdf_feature": "Erstellen/Herunterladen/Öffnen von PDF-Funktion hinzufügen",
+      "eslint_prettier": "Lerne und implementiere ESLint und Prettier für bessere Codequalität",
+      "bundler": "Lerne und implementiere Webpack oder einen anderen Bundler für einen besseren Build-Prozess",
+      "demo": "Demo (Route, Kind-Route, wiederverwendbare Formulare)",
+      "status": {
+        "implemented": "Implementiert",
+        "ongoing": "In Bearbeitung",
+        "not_implemented": "Nicht implementiert"
+      }
+    },
+    "topnav": {
+        "home": "Zuhause",
+        "table": "Tabelle"
+    }
+  }
+  

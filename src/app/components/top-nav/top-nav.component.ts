@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LogoutDialogComponent } from '../../dialogs/logout-dialog/logout-dialog.component';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-top-nav',
@@ -30,6 +31,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSlideToggleModule,
     NgClass,
     TitleCasePipe,
+    TranslateModule
   ],
 })
 export class TopNavComponent implements OnInit {
@@ -37,12 +39,14 @@ export class TopNavComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
   public dialog = inject(MatDialog);
   public authService = inject(FirebaseAuthService);
+  translate= inject(TranslateService)
 
   username = this.authService.getUsername();
   isLoggedIn = this.authService.IsLoggedIn();
 
   ngOnInit(): void {
     this.initializeTheme();
+    this.translate.setDefaultLang('en');
   }
   toggleSidenav() {
     this.sidenavToggle.emit();
@@ -80,5 +84,9 @@ export class TopNavComponent implements OnInit {
       width: '350px',
     });
     dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  changeLanguage(lang: string) {
+    this.translate.use(lang);  
   }
 }

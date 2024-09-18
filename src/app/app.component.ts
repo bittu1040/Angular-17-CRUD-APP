@@ -6,6 +6,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { NgToastModule, ToasterPosition } from 'ng-angular-popup';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface PeriodicElement {
   name: string;
@@ -26,6 +27,7 @@ export interface PeriodicElement {
     RouterOutlet,
     FooterComponent,
     NgToastModule,
+    TranslateModule
   ],
 })
 export class AppComponent implements OnInit {

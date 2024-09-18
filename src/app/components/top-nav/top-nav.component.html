@@ -12,8 +12,8 @@
   </div>
   <div style="display: flex; align-items: center">
     <div class="toolbar-buttons">
-      <a class="btn home" routerLink="/home">Home</a>
-      <a class="btn table_example" routerLink="/table">Table</a>
+      <a class="btn home" routerLink="/home">{{ 'topnav.home' | translate}} </a>
+      <a class="btn table_example" routerLink="/table">{{ 'topnav.table' | translate}} </a>
       <a
         class="btn user_menu"
         id="dropdownMenuLink"
@@ -33,11 +33,19 @@
             <mat-slide-toggle (change)="toggleTheme()"></mat-slide-toggle>
           </a>
         </li>
-        <li>
-          <a class="dropdown-item link-style">
+        <li class="nav-item dropdown">
+          <a class="dropdown-item link-style dropdown-toggle" id="languageDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-globe me-3"></i>
-            <span>Language</span>
+            <span>{{ 'LANGUAGE' | translate }}</span>
           </a>
+          <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+            <li>
+              <a class="dropdown-item" (click)="changeLanguage('en')">English</a>
+            </li>
+            <li>
+              <a class="dropdown-item" (click)="changeLanguage('de')">German</a>
+            </li>
+          </ul>
         </li>
         @if (username()) {
           <li>
