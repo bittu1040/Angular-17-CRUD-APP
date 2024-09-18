@@ -6,24 +6,23 @@
     [mode]="isMobile ? 'over' : 'side'"
     [opened]="isSideNavOpened"
   >
-  <mat-nav-list>
-    <mat-list-item routerLink="/home">
-      <div class="sidenavtext">{{ 'sidenav.home' | translate }}</div>
-    </mat-list-item>
-    <mat-list-item routerLink="/table">
-      <div class="sidenavtext">{{ 'sidenav.table' | translate }}</div>
-    </mat-list-item>
-    <mat-list-item routerLink="/github-user">
-      <div class="sidenavtext">{{ 'sidenav.github_user' | translate }}</div>
-    </mat-list-item>
-    <mat-list-item
-      routerLink="/route-demo/products"
-      [queryParams]="{ category: 'all' }"
-    >
-      <div class="sidenavtext">{{ 'sidenav.router_demo' | translate }}</div>
-    </mat-list-item>
-  </mat-nav-list>
-  
+    <mat-nav-list>
+      <mat-list-item routerLink="/home">
+        <div class="sidenavtext">{{ 'sidenav.home' | translate }}</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/table">
+        <div class="sidenavtext">{{ 'sidenav.table' | translate }}</div>
+      </mat-list-item>
+      <mat-list-item routerLink="/github-user">
+        <div class="sidenavtext">{{ 'sidenav.github_user' | translate }}</div>
+      </mat-list-item>
+      <mat-list-item
+        routerLink="/route-demo/products"
+        [queryParams]="{ category: 'all' }"
+      >
+        <div class="sidenavtext">{{ 'sidenav.router_demo' | translate }}</div>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="container">

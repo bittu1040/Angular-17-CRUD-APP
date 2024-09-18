@@ -31,7 +31,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     MatSlideToggleModule,
     NgClass,
     TitleCasePipe,
-    TranslateModule
+    TranslateModule,
   ],
 })
 export class TopNavComponent implements OnInit {
@@ -39,7 +39,7 @@ export class TopNavComponent implements OnInit {
   @Output() sidenavToggle = new EventEmitter<void>();
   public dialog = inject(MatDialog);
   public authService = inject(FirebaseAuthService);
-  translate= inject(TranslateService)
+  translate = inject(TranslateService);
 
   username = this.authService.getUsername();
   isLoggedIn = this.authService.IsLoggedIn();
@@ -87,6 +87,6 @@ export class TopNavComponent implements OnInit {
   }
 
   changeLanguage(lang: string) {
-    this.translate.use(lang);  
+    this.translate.use(lang);
   }
 }

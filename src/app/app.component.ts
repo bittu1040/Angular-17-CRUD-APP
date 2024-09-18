@@ -27,7 +27,7 @@ export interface PeriodicElement {
     RouterOutlet,
     FooterComponent,
     NgToastModule,
-    TranslateModule
+    TranslateModule,
   ],
 })
 export class AppComponent implements OnInit {
