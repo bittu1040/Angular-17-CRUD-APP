@@ -17,14 +17,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
-export const provideTranslation = () => ({
-  defaultLanguage: 'en',
-  loader: {
-    provide: TranslateLoader,
-    useFactory: HttpLoaderFactory,
-    deps: [HttpClient],
-  },
-});
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,7 +28,16 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom([
       HttpClientModule,
-      TranslateModule.forRoot(provideTranslation()),
+      TranslateModule.forRoot(
+        
+        {
+        defaultLanguage: 'en',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
+        },
+      }),
     ]),
   ],
 };
