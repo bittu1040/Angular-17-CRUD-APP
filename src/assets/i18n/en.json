@@ -13,6 +13,7 @@
     "crud_operation": "CRUD operation in Table with Firebase",
     "reusable_table": "Reusable table with Sorting, Searching, and Pagination feature",
     "unit_tests": "Write unit tests for components",
+    "Contact_form_email_notification": "Add email notification for contact form submission with Firebase",
     "theme_switcher": "Implement Light/Dark theme switcher",
     "multilingual_support": "Implement multilingual support",
     "pdf_feature": "Add Create/Download/Open PDF feature",
