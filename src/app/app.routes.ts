@@ -11,6 +11,7 @@ import { GithubUserComponent } from './components/github-user/github-user.compon
 import { RouteDemoComponent } from './components/route-demo/route-demo.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -30,6 +31,7 @@ export const routes: Routes = [
       { path: 'products/:id', component: ProductDetailsComponent },
     ],
   },
+  { path: 'contact-form', component: ContactFormComponent },
   { path: 'login', component: LoginComponent, canActivate: [authGuard] },
   { path: 'signup', component: SignupComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
