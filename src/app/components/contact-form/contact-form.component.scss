@@ -1,0 +1,16 @@
+.contact-form-container {
+  background-color: var(--main-bg-color-1);
+  color: var(--primary-text-color);
+  border-radius: 8px;
+}
+
+.contact-form-input {
+  background-color: var(--main-bg-color-1);
+  border-radius: 4px;
+  padding: 8px;
+  border-color: var(--border-color);
+  color: var(--primary-text-color);
+}
+.contact-form-input::placeholder {
+  color: var(--primary-text-color);
+}

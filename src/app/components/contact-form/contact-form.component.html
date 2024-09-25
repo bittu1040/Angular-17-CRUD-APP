@@ -1,15 +1,23 @@
-<div class="contact-form-container mt-4 p-4">
-  <div class="card p-3">
+<div class="contact-form-container mt-4 p-3">
+  <div>
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Name</label>
-        <input type="email" class="form-control" formControlName="name" />
+        <input
+          type="email"
+          class="form-control contact-form-input"
+          formControlName="name"
+        />
       </div>
       <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label"
           >Email address</label
         >
-        <input type="email" class="form-control" formControlName="email" />
+        <input
+          type="email"
+          class="form-control contact-form-input"
+          formControlName="email"
+        />
         @if (EmailRequired) {
           <div class="text-danger">email is required</div>
         } @else if (EmailInvalid) {
@@ -21,7 +29,7 @@
           >Your message</label
         >
         <textarea
-          class="form-control"
+          class="form-control contact-form-input"
           formControlName="message"
           rows="3"
         ></textarea>

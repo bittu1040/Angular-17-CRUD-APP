@@ -15,10 +15,15 @@ import { ContactFormComponent } from './components/contact-form/contact-form.com
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, title: 'Home' },
   { path: 'github-user/:username', component: GithubUserComponent },
-  { path: 'github-user', component: GithubUserComponent },
-  { path: 'table', component: TableComponent, canActivate: [authGuard] },
+  { path: 'github-user', component: GithubUserComponent, title: 'Github User' },
+  {
+    path: 'table',
+    component: TableComponent,
+    canActivate: [authGuard],
+    title: 'Table',
+  },
   {
     path: 'route-demo',
     component: RouteDemoComponent,
@@ -31,9 +36,18 @@ export const routes: Routes = [
       { path: 'products/:id', component: ProductDetailsComponent },
     ],
   },
-  { path: 'contact-form', component: ContactFormComponent },
-  { path: 'login', component: LoginComponent, canActivate: [authGuard] },
-  { path: 'signup', component: SignupComponent },
+  {
+    path: 'contact-form',
+    component: ContactFormComponent,
+    title: 'Contact Form',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [authGuard],
+    title: 'Login',
+  },
+  { path: 'signup', component: SignupComponent, title: 'Signup' },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'login-redirect', component: LoginRedirectsComponent },
   { path: '**', component: PageNotFoundComponent },
