@@ -1,4 +1,13 @@
+/*
+service id-  service_rzze9xg
+template id- template_hmt3nrt
+
+
+*/
+
 import { Component, inject } from '@angular/core';
+import emailjs from 'emailjs-com';
+
 import {
   FormGroup,
   FormBuilder,
@@ -33,19 +42,60 @@ export class ContactFormComponent {
     if (this.contactForm.valid) {
       this.contactService.contactFormSubmit(this.contactForm.value).subscribe({
         next: (data) => {
-          console.log('User added successfully', data);
-          this.toastService.success('Sent successfully', 'CONTACT FORM', 4000);
-          this.contactForm.reset();
+          console.log('Form submitted successfully', data);
+          this.toastService.success(
+            'Form submitted successfully',
+            'CONTACT FORM',
+            4000,
+          );
+          const templateParams = {
+            from_name: this.contactForm.value.name,
+            from_email: this.contactForm.value.email,
+            message: this.contactForm.value.message,
+            to_name: 'Bittu',
+          };
+
+          emailjs
+            .send(
+              'service_rzze9xg',
+              'template_hmt3nrt',
+              templateParams,
+              'SBRyfBr7EaLxkreY3',
+            )
+            .then(
+              (response) => {
+                console.log(
+                  'Email sent successfully!',
+                  response.status,
+                  response.text,
+                );
+                this.toastService.success(
+                  'Email sent successfully',
+                  'CONTACT FORM',
+                  4000,
+                );
+                this.contactForm.reset();
+              },
+              (error) => {
+                console.error('Failed to send email...', error);
+                this.toastService.danger(
+                  'Failed to send email',
+                  'CONTACT FORM',
+                  4000,
+                );
+              },
+            );
         },
-        error: (error) => console.error('Error adding user', error),
+        error: (error) => {
+          console.error('Error adding user to Firestore', error);
+          this.toastService.danger(
+            'Failed to submit form',
+            'CONTACT FORM',
+            4000,
+          );
+        },
       });
     }
-
-    // const sendEmail = this.fns.httpsCallable('sendEmail');
-    // sendEmail(this.contactForm.value).subscribe(
-    // result => console.log('Email sent successfully'),
-    // error => console.error('Error sending email', error)
-    // );
   }
 
   get EmailInvalid() {

@@ -29,6 +29,7 @@
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "bootstrap": "^5.3.3",
+    "emailjs-com": "^3.2.0",
     "ng-angular-popup": "^0.6.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
