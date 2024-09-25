@@ -10,6 +10,11 @@
           >Email address</label
         >
         <input type="email" class="form-control" formControlName="email" />
+        @if (EmailRequired) {
+          <div class="text-danger">email is required</div>
+        } @else if (EmailInvalid) {
+          <div class="text-danger">email is not valid</div>
+        }
       </div>
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label"
@@ -21,7 +26,13 @@
           rows="3"
         ></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="contactForm.invalid"
+      >
+        Submit
+      </button>
     </form>
   </div>
 </div>
