@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { FooterComponent } from './components/footer/footer.component';
@@ -7,6 +7,7 @@ import { MatListModule } from '@angular/material/list';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 import { NgToastModule, ToasterPosition } from 'ng-angular-popup';
 import { TranslateModule } from '@ngx-translate/core';
+import { InitConfigService } from './services/init-config.service';
 
 export interface PeriodicElement {
   name: string;
@@ -35,6 +36,9 @@ export class AppComponent implements OnInit {
   isMobile: boolean = false;
   isSideNavOpened = true;
 
+  users: any;
+  initService= inject(InitConfigService)
+
   ToasterPosition = ToasterPosition;
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -45,5 +49,9 @@ export class AppComponent implements OnInit {
       this.isSideNavOpened = false;
     }
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  // app initializer consume
+  this.users= this.initService.getUsers();
+  console.log("users in app component",this.users);
+  }
 }
