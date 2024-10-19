@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "eslint ./src --fix",
     "prepare": "husky install",
-    "lint:prettier": "prettier --write \"src/**/*.{html,scss,ts}\""
+    "lint:prettier": "prettier --write \"src/**/*.{html,scss,ts}\"",
+    "jsonServer":"json-server --watch mock-backend/db.json"
   },
   "private": true,
   "dependencies": {
@@ -50,6 +51,7 @@
     "eslint": "^8.57.0",
     "husky": "^8.0.0",
     "jasmine-core": "~5.1.0",
+    "json-server": "^1.0.0-beta.3",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
