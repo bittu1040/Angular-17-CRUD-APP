@@ -10,7 +10,7 @@
     "lint": "eslint ./src --fix",
     "prepare": "husky install",
     "lint:prettier": "prettier --write \"src/**/*.{html,scss,ts}\"",
-    "jsonServer":"json-server --watch mock-backend/db.json"
+    "jsonServer": "json-server --watch mock-backend/db.json"
   },
   "private": true,
   "dependencies": {
@@ -31,6 +31,8 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "bootstrap": "^5.3.3",
     "emailjs-com": "^3.2.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
     "ng-angular-popup": "^0.6.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

@@ -12,7 +12,7 @@ export class InitConfigService {
 
   loadUsers():Observable<any>{
     return this.http.get('https://jsonplaceholder.typicode.com/users').pipe(
-      delay(5000),
+      delay(1000),
       map((response)=>{
         this.users = response;
         console.log("users",this.users);

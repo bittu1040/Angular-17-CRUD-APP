@@ -1,0 +1,33 @@
+<!-- invoice.component.html -->
+
+<h1 class="mt-4">WORK IN PROGRESS</h1>
+
+<div id="invoice" class="invoice-template">
+    <h2>Invoice</h2>
+    <p><strong>Invoice No:</strong> {{ invoiceData.invoiceNumber }}</p>
+    <p><strong>Date:</strong> {{ invoiceData.date | date }}</p>
+    <p><strong>Customer:</strong> {{ invoiceData.customerName }}</p>
+    <hr>
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of invoiceData.items">
+          <td>{{ item.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.quantity * item.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+    <h3>Total: {{ calculateTotal() | currency }}</h3>
+    <button (click)="generatePDF()">Download PDF</button>
+  </div>
+  

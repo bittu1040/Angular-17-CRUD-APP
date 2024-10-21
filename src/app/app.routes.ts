@@ -12,6 +12,7 @@ import { RouteDemoComponent } from './components/route-demo/route-demo.component
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
+import { InvoiceGeneratorComponent } from './components/invoice-generator/invoice-generator.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -23,6 +24,9 @@ export const routes: Routes = [
     component: TableComponent,
     canActivate: [authGuard],
     title: 'Table',
+  },
+  {
+    path: 'invoice-generator', component: InvoiceGeneratorComponent, title: 'Invoice Generator'
   },
   {
     path: 'route-demo',
