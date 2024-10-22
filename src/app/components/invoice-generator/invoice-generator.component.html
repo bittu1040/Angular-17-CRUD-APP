@@ -1,33 +1,107 @@
-<!-- invoice.component.html -->
-
-<h1 class="mt-4">WORK IN PROGRESS</h1>
-
-<div id="invoice" class="invoice-template">
-    <h2>Invoice</h2>
-    <p><strong>Invoice No:</strong> {{ invoiceData.invoiceNumber }}</p>
-    <p><strong>Date:</strong> {{ invoiceData.date | date }}</p>
-    <p><strong>Customer:</strong> {{ invoiceData.customerName }}</p>
-    <hr>
-    <table>
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Quantity</th>
-          <th>Price</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of invoiceData.items">
-          <td>{{ item.name }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>{{ item.price }}</td>
-          <td>{{ item.quantity * item.price }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <hr>
-    <h3>Total: {{ calculateTotal() | currency }}</h3>
-    <button (click)="generatePDF()">Download PDF</button>
+<div class="row mt-2">
+  <div class="col-12">
+    <h2>Invoice Generator (WIP)</h2>
   </div>
-  
+</div>
+
+<div class="row">
+  <div class="col">
+    <form [formGroup]="invoiceForm">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="customerName" class="form-label">Customer Name</label>
+          <input type="text" id="customerName" class="form-control" formControlName="customerName"
+            placeholder="Enter customer name" required />
+          <div *ngIf="invoiceForm.get('customerName')?.invalid && invoiceForm.get('customerName')?.touched"
+            class="text-danger">
+            Customer name is required
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="customerEmail" class="form-label">Customer Email</label>
+          <input type="email" id="customerEmail" class="form-control" formControlName="customerEmail"
+            placeholder="Enter customer email" required />
+          <div *ngIf="invoiceForm.get('customerEmail')?.invalid && invoiceForm.get('customerEmail')?.touched"
+            class="text-danger">
+            A valid email is required
+          </div>
+        </div>
+      </div>
+
+      <h3 class="my-4">Items</h3>
+      <div formArrayName="items">
+        <div class="row mb-3" *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+          <!-- Item Description -->
+          <div class="col-md-4">
+            <label for="description-{{ i }}" class="form-label">Description</label>
+            <input type="text" id="description-{{ i }}" class="form-control" formControlName="description"
+              placeholder="Item description" required />
+          </div>
+
+          <div class="col-md-3">
+            <label for="quantity-{{ i }}" class="form-label">Quantity</label>
+            <input type="number" id="quantity-{{ i }}" class="form-control" formControlName="quantity" required />
+          </div>
+
+          <div class="col-md-3">
+            <label for="price-{{ i }}" class="form-label">Price</label>
+            <input type="number" id="price-{{ i }}" class="form-control" formControlName="price" required />
+          </div>
+
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="button" class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" (click)="addItem()">Add Item</button>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-12">
+          <h4 class="text-end">Total: {{ totalPrice | currency }}</h4>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="d-flex justify-content-end mt-3">
+        <button type="submit" class="btn btn-success" [disabled]="!invoiceForm.valid" (click)="generatePDF()">Generate
+          Invoice PDF</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Optional Invoice Preview (before PDF generation) -->
+<!-- <div id="invoicePreview" class="mt-5" *ngIf="showInvoice">
+    <h2>Invoice</h2>
+    <p><strong>Customer:</strong> {{ invoiceForm.value.customerName }}</p>
+    <p><strong>Email:</strong> {{ invoiceForm.value.customerEmail }}</p>
+    <h3>Items</h3>
+    <ul>
+      <li *ngFor="let item of invoiceForm.value.items">
+        {{ item.description }} - {{ item.quantity }} x {{ item.price | currency }}
+      </li>
+    </ul>
+    <h4>Total: {{ totalPrice | currency }}</h4>
+  </div>
+</div> -->

@@ -15,7 +15,7 @@ export class InitConfigService {
       delay(1000),
       map((response)=>{
         this.users = response;
-        console.log("users",this.users);
+        // console.log("users",this.users);
         return this.users
       })
     )

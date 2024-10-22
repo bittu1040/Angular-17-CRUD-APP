@@ -1,5 +1,6 @@
-import { CurrencyPipe, DatePipe, NgFor } from '@angular/common';
-import { Component } from '@angular/core';
+import { CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -7,46 +8,78 @@ import jsPDF from 'jspdf';
 @Component({
   selector: 'app-invoice-generator',
   standalone: true,
-  imports: [NgFor, CurrencyPipe, DatePipe],
+  imports: [NgFor, CurrencyPipe, DatePipe, NgIf, ReactiveFormsModule],
   templateUrl: './invoice-generator.component.html',
   styleUrl: './invoice-generator.component.scss'
 })
 export class InvoiceGeneratorComponent {
 
-  invoiceData = {
-    invoiceNumber: 'INV-1001',
-    date: new Date(),
-    customerName: 'John Doe',
-    items: [
-      { name: 'Product 1', quantity: 2, price: 50 },
-      { name: 'Product 2', quantity: 1, price: 30 },
-      { name: 'Product 3', quantity: 3, price: 20 }
-    ]
-  };
 
-  // Calculate total price
-  calculateTotal() {
-    return this.invoiceData.items.reduce((total, item) => total + item.quantity * item.price, 0);
+  invoiceForm: FormGroup;
+  showInvoice = false;
+  
+  constructor(private fb: FormBuilder) {
+    // Initialize the form with customer details and items array
+    this.invoiceForm = this.fb.group({
+      customerName: ['', Validators.required],
+      customerEmail: ['', [Validators.required, Validators.email]],
+      items: this.fb.array([this.createItem()])
+    });
   }
 
-  // Method to generate PDF
+  get items(): FormArray {
+    return this.invoiceForm.get('items') as FormArray;
+  }
+
+  createItem(): FormGroup {
+    return this.fb.group({
+      description: ['', Validators.required],
+      quantity: [1, [Validators.required, Validators.min(1)]],
+      price: [0, [Validators.required, Validators.min(0)]],
+    });
+  }
+
+  addItem() {
+    this.items.push(this.createItem());
+  }
+
+  removeItem(index: number) {
+    this.items.removeAt(index);
+  }
+
+  get totalPrice(): number {
+    return this.items.controls.reduce((acc, item) => {
+      const quantity = item.get('quantity')?.value;
+      const price = item.get('price')?.value;
+      return acc + (quantity * price);
+    }, 0);
+  }
+
   generatePDF() {
-    const invoiceElement = document.getElementById('invoice');
-    
-    // Check if invoiceElement is not null
-    if (invoiceElement) {
-      html2canvas(invoiceElement).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-        const doc = new jsPDF('p', 'mm', 'a4');
-  
-        const imgHeight = (canvas.height * 208) / canvas.width;
-        doc.addImage(imgData, 'PNG', 0, 0, 208, imgHeight);
-  
-        doc.save('invoice.pdf');
-      });
-    } else {
-      console.error("Invoice element not found.");
-    }
+    this.showInvoice = true; 
+
+    const invoiceElement = document.getElementById('invoicePreview');
+    html2canvas(invoiceElement!).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 208;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      pdf.save('invoice.pdf');
+    });
   }
 
 }

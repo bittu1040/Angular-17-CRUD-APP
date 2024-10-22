@@ -52,6 +52,6 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   // app initializer consume
   this.users= this.initService.getUsers();
-  console.log("users in app component",this.users);
+  // console.log("users in app component",this.users);
   }
 }
