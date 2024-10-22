@@ -19,10 +19,11 @@ export class InvoiceGeneratorComponent {
   showInvoice = false;
   
   constructor(private fb: FormBuilder) {
-    // Initialize the form with customer details and items array
     this.invoiceForm = this.fb.group({
       customerName: ['', Validators.required],
-      customerEmail: ['', [Validators.required, Validators.email]],
+      customerEmail: ['', [, Validators.email]],
+      customerAddress: ['', Validators.required],
+      customerPhone: ['', Validators.required],
       items: this.fb.array([this.createItem()])
     });
   }

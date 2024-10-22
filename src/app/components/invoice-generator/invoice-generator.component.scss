@@ -1,1 +1,33 @@
 
+
+.invoice-page-container {
+    background-color: var(--main-bg-color-1);
+    color: var(--primary-text-color);
+    border-radius: 8px;
+  }
+  
+  .invoice-form-input {
+    background-color: var(--main-bg-color-1);
+    border-radius: 4px;
+    padding: 8px;
+    border-color: var(--border-color);
+    color: var(--primary-text-color);
+  }
+  .invoice-form-input::placeholder {
+    color: var(--primary-text-color);
+  }
+
+.invoice-form{
+    // border-color: var(--border-color);
+}
+
+.invoice-button{
+    // border: 1px solid blue;
+}
+
+.customer-details{
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px;
+}
+

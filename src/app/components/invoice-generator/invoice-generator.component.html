@@ -1,78 +1,171 @@
-<div class="row mt-2">
+<div class="row mt-4">
   <div class="col-12">
     <h2>Invoice Generator (WIP)</h2>
   </div>
 </div>
+<div class="invoice-page-container p-3">
+  <div class="row d-flex justify-content-around">
+    <div class="col-lg-9 invoice-form">
+      <form [formGroup]="invoiceForm">
+        <div class="row customer-details">
+          <h3>Customer details</h3>
+          <div class="col-md-6 mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control invoice-form-input" formControlName="customerName"
+              placeholder="Enter customer name" />
+            <div *ngIf="invoiceForm.get('customerName')?.invalid && invoiceForm.get('customerName')?.touched"
+              class="text-danger">
+              Customer name is required
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-control invoice-form-input" formControlName="customerEmail"
+              placeholder="Enter customer email" />
+            <div *ngIf="invoiceForm.get('customerEmail')?.invalid && invoiceForm.get('customerEmail')?.touched"
+              class="text-danger">
+              A valid email is required
+            </div>
+          </div>
 
-<div class="row">
-  <div class="col">
-    <form [formGroup]="invoiceForm">
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="customerName" class="form-label">Customer Name</label>
-          <input type="text" id="customerName" class="form-control" formControlName="customerName"
-            placeholder="Enter customer name" required />
-          <div *ngIf="invoiceForm.get('customerName')?.invalid && invoiceForm.get('customerName')?.touched"
-            class="text-danger">
-            Customer name is required
+          <div class="col-md-6 mb-3">
+            <label for="customerAddress" class="form-label">Customer Address</label>
+            <textarea type="text" class="form-control invoice-form-input" formControlName="customerAddress"
+              placeholder="Enter customer address"></textarea>
+            <div *ngIf="invoiceForm.get('customerAddress')?.invalid && invoiceForm.get('customerAddress')?.touched"
+              class="text-danger">
+              A valid customer address is required
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="customerPhone" class="form-label">Customer Phone</label>
+            <input type="text" id="customerPhone" class="form-control invoice-form-input"
+              formControlName="customerPhone" placeholder="Enter customer phone" />
+            <div *ngIf="invoiceForm.get('customerPhone')?.invalid && invoiceForm.get('customerPhone')?.touched"
+              class="text-danger">
+              A valid phone is required
+            </div>
           </div>
         </div>
-
-        <div class="col-md-6 mb-3">
-          <label for="customerEmail" class="form-label">Customer Email</label>
-          <input type="email" id="customerEmail" class="form-control" formControlName="customerEmail"
-            placeholder="Enter customer email" required />
-          <div *ngIf="invoiceForm.get('customerEmail')?.invalid && invoiceForm.get('customerEmail')?.touched"
-            class="text-danger">
-            A valid email is required
+        <div class="row mt-4 order-details">
+          <h3>Order details</h3>
+          <div class="col-md-6 mb-3">
+            <label for="orderDate" class="form-label">Order Date</label>
+            <input type="date" id="orderDate" class="form-control invoice-form-input" formControlName="orderDate"
+              placeholder="Enter order date" />
+            <div *ngIf="invoiceForm.get('orderDate')?.invalid && invoiceForm.get('orderDate')?.touched"
+              class="text-danger">
+              Order date is required
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="orderNumber" class="form-label">Order Number</label>
+            <input type="text" id="orderNumber" class="form-control invoice-form-input" formControlName="orderNumber"
+              placeholder="Enter order number" />
+            <div *ngIf="invoiceForm.get('orderNumber')?.invalid && invoiceForm.get('orderNumber')?.touched"
+              class="text-danger">
+              Order number is required
+            </div>
           </div>
         </div>
-      </div>
-
-      <h3 class="my-4">Items</h3>
-      <div formArrayName="items">
-        <div class="row mb-3" *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
-          <!-- Item Description -->
-          <div class="col-md-4">
-            <label for="description-{{ i }}" class="form-label">Description</label>
-            <input type="text" id="description-{{ i }}" class="form-control" formControlName="description"
-              placeholder="Item description" required />
-          </div>
-
-          <div class="col-md-3">
-            <label for="quantity-{{ i }}" class="form-label">Quantity</label>
-            <input type="number" id="quantity-{{ i }}" class="form-control" formControlName="quantity" required />
-          </div>
-
-          <div class="col-md-3">
-            <label for="price-{{ i }}" class="form-label">Price</label>
-            <input type="number" id="price-{{ i }}" class="form-control" formControlName="price" required />
-          </div>
-
-          <div class="col-md-2 d-flex align-items-end">
-            <button type="button" class="btn btn-danger" (click)="removeItem(i)">Remove</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary" (click)="addItem()">Add Item</button>
-      </div>
-
-      <div class="row mt-4">
-        <div class="col-md-12">
-          <h4 class="text-end">Total: {{ totalPrice | currency }}</h4>
-        </div>
-      </div>
-
-      <!-- Submit Button -->
-      <div class="d-flex justify-content-end mt-3">
-        <button type="submit" class="btn btn-success" [disabled]="!invoiceForm.valid" (click)="generatePDF()">Generate
-          Invoice PDF</button>
-      </div>
-    </form>
+      </form>
+    </div>
+    <div class="col-lg-2 mt-3 invoice-button">
+      <button type="button" class="btn btn-success">Download Invoice</button>
+    </div>
   </div>
 </div>
+
+
+
+
+
+<!-- 
+<form [formGroup]="invoiceForm">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="customerName" class="form-label">Customer Name</label>
+      <input type="text" id="customerName" class="form-control" formControlName="customerName"
+        placeholder="Enter customer name" />
+      <div *ngIf="invoiceForm.get('customerName')?.invalid && invoiceForm.get('customerName')?.touched"
+        class="text-danger">
+        Customer name is required
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="customerEmail" class="form-label">Customer Email</label>
+      <input type="email" id="customerEmail" class="form-control" formControlName="customerEmail"
+        placeholder="Enter customer email" />
+      <div *ngIf="invoiceForm.get('customerEmail')?.invalid && invoiceForm.get('customerEmail')?.touched"
+        class="text-danger">
+        A valid email is required
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label for="customerAddress" class="form-label">Customer Address</label>
+      <textarea type="text" class="form-control" formControlName="customerAddress"
+        placeholder="Enter customer address"></textarea>
+      <div *ngIf="invoiceForm.get('customerAddress')?.invalid && invoiceForm.get('customerAddress')?.touched"
+        class="text-danger">
+        A valid customer address is required
+      </div>
+    </div>
+
+  <div class="col-md-6 mb-3">
+    <label for="customerPhone" class="form-label">Customer Phone</label>
+    <input type="text" id="customerPhone" class="form-control" formControlName="customerPhone"
+      placeholder="Enter customer phone" />
+    <div *ngIf="invoiceForm.get('customerPhone')?.invalid && invoiceForm.get('customerPhone')?.touched"
+      class="text-danger">
+      A valid phone is required
+    </div>
+  </div>
+
+  <h3 class="my-4">Items</h3>
+  <div formArrayName="items">
+    <div class="row mb-3" *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+      <div class="col-md-4">
+        <label for="description-{{ i }}" class="form-label">Description</label>
+        <input type="text" id="description-{{ i }}" class="form-control" formControlName="description"
+          placeholder="Item description" />
+      </div>
+
+      <div class="col-md-3">
+        <label for="quantity-{{ i }}" class="form-label">Quantity</label>
+        <input type="number" id="quantity-{{ i }}" class="form-control" formControlName="quantity" />
+      </div>
+
+      <div class="col-md-3">
+        <label for="price-{{ i }}" class="form-label">Price</label>
+        <input type="number" id="price-{{ i }}" class="form-control" formControlName="price" />
+      </div>
+
+      <div class="col-md-2 d-flex align-items-end">
+        <button type="button" class="btn btn-danger" (click)="removeItem(i)">Remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button type="button" class="btn btn-primary" (click)="addItem()">Add Item</button>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-12">
+      <h4 class="text-end">Total: {{ totalPrice | currency }}</h4>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end mt-3">
+    <button type="submit" class="btn btn-success" [disabled]="!invoiceForm.valid" (click)="generatePDF()">Generate
+      Invoice PDF</button>
+  </div>
+  </div>
+</form> -->
+
+
 
 
 
