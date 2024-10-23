@@ -7,7 +7,7 @@
   <div class="row d-flex justify-content-around">
     <div class="col-lg-9 invoice-form">
       <form [formGroup]="invoiceForm">
-        <div class="row customer-details">
+        <div class="row customer-details p-2">
           <h3>Customer details</h3>
           <div class="col-md-6 mb-3">
             <label for="name" class="form-label">Name</label>
@@ -48,26 +48,40 @@
             </div>
           </div>
         </div>
-        <div class="row mt-4 order-details">
+        <div class="row mt-4 order-details p-2">
           <h3>Order details</h3>
-          <div class="col-md-6 mb-3">
-            <label for="orderDate" class="form-label">Order Date</label>
-            <input type="date" id="orderDate" class="form-control invoice-form-input" formControlName="orderDate"
-              placeholder="Enter order date" />
-            <div *ngIf="invoiceForm.get('orderDate')?.invalid && invoiceForm.get('orderDate')?.touched"
-              class="text-danger">
-              Order date is required
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="orderNumber" class="form-label">Order Number</label>
-            <input type="text" id="orderNumber" class="form-control invoice-form-input" formControlName="orderNumber"
-              placeholder="Enter order number" />
-            <div *ngIf="invoiceForm.get('orderNumber')?.invalid && invoiceForm.get('orderNumber')?.touched"
-              class="text-danger">
-              Order number is required
-            </div>
-          </div>
+          <button type="button" class="btn btn-danger" (click)="addItem()">Add Item</button>
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>Item name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total price</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody formArrayName="items">
+              <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
+                <td>
+                  <input type="text" class="form-control" formControlName="description" />
+                </td>
+                <td>
+                  <input type="number" class="form-control" formControlName="quantity" />
+                </td>
+                <td>
+                  <input type="number" class="form-control" formControlName="price" />
+                </td>
+                <td>
+                  <input type="number" class="form-control" formControlName="totalPrice" />
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger" (click)="removeItem(i)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
         </div>
       </form>
     </div>
