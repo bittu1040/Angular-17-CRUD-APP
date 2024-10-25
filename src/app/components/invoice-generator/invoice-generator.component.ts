@@ -1,8 +1,9 @@
-import { CurrencyPipe, DatePipe, NgFor, NgIf } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { CurrencyPipe, DatePipe, formatDate, NgFor, NgIf } from '@angular/common';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 
 @Component({
@@ -12,19 +13,34 @@ import jsPDF from 'jspdf';
   templateUrl: './invoice-generator.component.html',
   styleUrl: './invoice-generator.component.scss'
 })
-export class InvoiceGeneratorComponent {
+export class InvoiceGeneratorComponent implements OnInit {
 
 
   invoiceForm: FormGroup;
-  showInvoice = false;
-  
+
   constructor(private fb: FormBuilder) {
     this.invoiceForm = this.fb.group({
-      customerName: ['', Validators.required],
-      customerEmail: ['', [, Validators.email]],
-      customerAddress: ['', Validators.required],
-      customerPhone: ['', Validators.required],
+      customerName: ['Bittu', Validators.required],
+      customerEmail: ['bittu@gmail.com', [Validators.required, Validators.email]],
+      customerAddress: ['Banglore India', Validators.required],
+      customerPhone: ['+91 123456789', Validators.required],
       items: this.fb.array([this.createItem()])
+    });
+  }
+
+  ngOnInit(): void {
+    this.calculateTotal();
+    this.invoiceForm.get('items')?.valueChanges.subscribe(() => {
+      this.calculateTotal();
+    })
+  }
+
+  calculateTotal(): void {
+    this.items.controls.forEach((item) => {
+      const quantity = item.get('quantity')?.value || 0;
+      const price = item.get('price')?.value || 0;
+      const totalPrice = quantity * price;
+      item.get('totalPrice')?.setValue(totalPrice, { emitEvent: false });
     });
   }
 
@@ -35,52 +51,80 @@ export class InvoiceGeneratorComponent {
   createItem(): FormGroup {
     return this.fb.group({
       description: ['', Validators.required],
-      quantity: [1, [Validators.required, Validators.min(1)]],
-      price: [0, [Validators.required, Validators.min(0)]],
+      quantity: ["", [Validators.required, Validators.min(1)]],
+      price: ["", Validators.required],
+      totalPrice: [{ value: 0, disabled: true }]
     });
   }
 
-  addItem() {
+  get totalAmount(): number {
+    let total = 0;
+    this.items.controls.forEach((item) => {
+      total += item.get('totalPrice')?.value || 0;
+    });
+    return total;
+  }
+
+  addItem(): void {    
     this.items.push(this.createItem());
   }
 
-  removeItem(index: number) {
+  removeItem(index: number): void {
     this.items.removeAt(index);
   }
 
-  get totalPrice(): number {
-    return this.items.controls.reduce((acc, item) => {
-      const quantity = item.get('quantity')?.value;
-      const price = item.get('price')?.value;
-      return acc + (quantity * price);
-    }, 0);
-  }
 
-  generatePDF() {
-    this.showInvoice = true; 
 
-    const invoiceElement = document.getElementById('invoicePreview');
-    html2canvas(invoiceElement!).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const imgWidth = 208;
-      const pageHeight = 295;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-      let position = 0;
-
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+  generatePDF(): void {
+    const doc = new jsPDF();
+  
+    const date = formatDate(new Date(), 'MM/dd/yyyy', 'en');
+    doc.setFontSize(12);
+    doc.text(`Date: ${date}`, 190, 10, { align: 'right' });
+  
+    // Title
+    doc.setFontSize(18);
+    doc.text('Invoice', 10, 10);
+  
+    // Customer Details
+    doc.setFontSize(14);
+    doc.text('Customer Details', 10, 30);
+  
+    doc.setFontSize(12);
+    doc.text(`Name: ${this.invoiceForm.get('customerName')?.value}`, 10, 40);
+    doc.text(`Email: ${this.invoiceForm.get('customerEmail')?.value}`, 10, 50);
+    doc.text(`Address: ${this.invoiceForm.get('customerAddress')?.value}`, 10, 60);
+    doc.text(`Phone: ${this.invoiceForm.get('customerPhone')?.value}`, 10, 70);
+  
+    // Order Details
+    doc.setFontSize(14);
+    doc.text('Order Details', 10, 85);
+  
+    // Prepare item rows for the table
+    const itemRows = this.items.controls.map((control) => [
+      control.get('description')?.value,
+      control.get('quantity')?.value,
+      control.get('price')?.value,
+      control.get('totalPrice')?.value,
+    ]);
+  
+    // Add table with item details
+    autoTable(doc, {
+      head: [['Item Name', 'Quantity', 'Price', 'Total Price']],
+      body: itemRows,
+      startY: 95,
+      theme: 'grid',
+      styles: { fontSize: 12 },
+      headStyles: { fillColor: [22, 160, 133], textColor: 255 },
+      didDrawPage: (data) => {
+        doc.setFontSize(12);
+        const finalY = data.cursor?.y ?? 100;
+        doc.text(`Total Amount: ${this.totalAmount}`, 10, finalY + 10);
       }
-
-      pdf.save('invoice.pdf');
     });
+
+    // Save the PDF
+    doc.save('invoice.pdf');
   }
 
 }

@@ -1,10 +1,10 @@
-<div class="row mt-4">
-  <div class="col-12">
-    <h2>Invoice Generator (WIP)</h2>
+<div class="invoice-page-container p-3 mt-4">
+  <div class="row">
+    <div class="col-12">
+      <h2>Invoice Generator</h2>
+    </div>
   </div>
-</div>
-<div class="invoice-page-container p-3">
-  <div class="row d-flex justify-content-around">
+  <div class="row d-flex justify-content-around" id="invoicePreview">
     <div class="col-lg-9 invoice-form">
       <form [formGroup]="invoiceForm">
         <div class="row customer-details p-2">
@@ -49,8 +49,12 @@
           </div>
         </div>
         <div class="row mt-4 order-details p-2">
-          <h3>Order details</h3>
-          <button type="button" class="btn btn-danger" (click)="addItem()">Add Item</button>
+          <div class="col d-flex justify-content-between">
+            <h3>Order details</h3>
+            <button type="button" class="btn" (click)="addItem()">
+              <i class="bi bi-plus-square"></i>
+            </button>
+          </div>
           <table class="table table-hover table-bordered">
             <thead>
               <tr>
@@ -64,29 +68,29 @@
             <tbody formArrayName="items">
               <tr *ngFor="let item of items.controls; let i=index" [formGroupName]="i">
                 <td>
-                  <input type="text" class="form-control" formControlName="description" />
+                  <input type="text" class="form-control invoice-form-input" formControlName="description" />
                 </td>
                 <td>
-                  <input type="number" class="form-control" formControlName="quantity" />
+                  <input type="number" class="form-control invoice-form-input" formControlName="quantity" />
                 </td>
                 <td>
-                  <input type="number" class="form-control" formControlName="price" />
+                  <input type="number" class="form-control invoice-form-input" formControlName="price" />
                 </td>
                 <td>
-                  <input type="number" class="form-control" formControlName="totalPrice" />
+                  <input type="number" class="form-control invoice-form-input" formControlName="totalPrice" />
                 </td>
                 <td>
-                  <button type="button" class="btn btn-danger" (click)="removeItem(i)">Delete</button>
+                  <button type="button" class="btn" (click)="removeItem(i)"><i class="bi bi-x-lg"></i></button>
                 </td>
               </tr>
             </tbody>
-
           </table>
+          <div>Total Amount: {{ totalAmount }}</div>
         </div>
       </form>
     </div>
     <div class="col-lg-2 mt-3 invoice-button">
-      <button type="button" class="btn btn-success">Download Invoice</button>
+      <button type="button" class="btn btn-success" (click)="generatePDF()">Download Invoice</button>
     </div>
   </div>
 </div>

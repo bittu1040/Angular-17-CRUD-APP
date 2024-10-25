@@ -33,6 +33,7 @@
     "emailjs-com": "^3.2.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "ng-angular-popup": "^0.6.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
