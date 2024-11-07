@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef, GridOptions } from 'ag-grid-community';
 
@@ -10,7 +10,7 @@ import { ColDef, GridOptions } from 'ag-grid-community';
   templateUrl: './ag-grid-table.component.html',
   styleUrl: './ag-grid-table.component.scss'
 })
-export class AgGridTableComponent {
+export class AgGridTableComponent implements OnInit {
   pageSize = 10;
   currentPage = 1;
   totalItems = 0;
