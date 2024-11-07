@@ -13,6 +13,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { InvoiceGeneratorComponent } from './components/invoice-generator/invoice-generator.component';
+import { AgGridTableComponent } from './components/ag-grid-table/ag-grid-table.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -23,6 +24,11 @@ export const routes: Routes = [
     path: 'table',
     component: TableComponent,
     canActivate: [authGuard],
+    title: 'Table',
+  },
+  {
+    path: 'ag-grid-table',
+    component: AgGridTableComponent,
     title: 'Table',
   },
   {

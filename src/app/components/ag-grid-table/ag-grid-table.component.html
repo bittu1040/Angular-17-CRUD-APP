@@ -1,0 +1,20 @@
+<!-- <ag-grid-angular
+style="width: 100%; height: 500px;"
+class="ag-theme-alpine"
+[gridOptions]="gridOptions"
+[rowData]="rowData"
+[pagination]="true"
+[paginationPageSize]="pageSize"
+[paginationNumberFormatter]="paginationNumberFormatter"
+(paginationChanged)="onPaginationChanged($event)"
+>
+</ag-grid-angular> -->
+
+
+
+<ag-grid-angular
+  style="height: calc(100vh - 110px);"
+  class="ag-theme-alpine"
+  [columnDefs]="columnDefs"
+  [rowData]="rowData">
+</ag-grid-angular>

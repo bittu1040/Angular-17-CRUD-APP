@@ -2,6 +2,7 @@
   "sidenav": {
     "home": "Home",
     "table": "Table",
+    "ag_grid_table": "AG-Grid Table",
     "github_user": "GitHub User",
     "router_demo": "Router Demo",
     "contact_form": "Contact Form",
