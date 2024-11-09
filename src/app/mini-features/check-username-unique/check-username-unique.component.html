@@ -1,0 +1,40 @@
+<form [formGroup]="userRegistrationForm" class="container p-4 mt-3 border rounded bg-light">
+    <h2>Check username uniqueness</h2>
+    <div class="mb-3">
+      <label for="username" class="form-label">Github username</label>
+      <input type="text" id="username" formControlName="username" class="form-control" />
+      @if (userRegistrationForm.get('username')?.errors?.['usernameTaken']) {
+        <div class="text-danger small mt-1">
+            Username is already taken.
+          </div>
+      }
+    </div>
+  
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" formControlName="email" class="form-control" />
+      @if (userRegistrationForm.get('email')?.errors?.['email']) {
+        <div class="text-danger small mt-1">
+            Please enter a valid email address.
+        </div>
+      }
+    </div>
+  
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" id="password" formControlName="password" class="form-control" />
+      @if (userRegistrationForm.get('password')?.errors?.['minlength']) {
+        <div class="text-danger small mt-1">
+            Password must be at least 6 characters long.
+        </div>
+      }
+    </div>
+  
+    <button type="button" (click)="submit()" [disabled]="!userRegistrationForm.valid" class="btn btn-primary w-100">
+      Submit
+    </button>
+  
+  </form>
+  
+
+  

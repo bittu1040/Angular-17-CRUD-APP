@@ -14,6 +14,7 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { ContactFormComponent } from './components/contact-form/contact-form.component';
 import { InvoiceGeneratorComponent } from './components/invoice-generator/invoice-generator.component';
 import { AgGridTableComponent } from './components/ag-grid-table/ag-grid-table.component';
+import { MiniFeaturesComponent } from './components/mini-features/mini-features.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -50,6 +51,11 @@ export const routes: Routes = [
     path: 'contact-form',
     component: ContactFormComponent,
     title: 'Contact Form',
+  },
+  {
+    path: 'mini-features',
+    component: MiniFeaturesComponent,
+    title: 'Mini Features',
   },
   {
     path: 'login',
