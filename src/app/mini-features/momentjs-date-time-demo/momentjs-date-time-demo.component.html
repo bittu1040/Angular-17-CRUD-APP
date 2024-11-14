@@ -1,0 +1,19 @@
+<form [formGroup]="timeForm" class="container p-4 mt-3 border rounded bg-light">
+    <h2>Work with date, time and moment js</h2>
+
+    <div class="mb-3">
+    <label for="timezone">Timezone:</label>
+    <select id="timezone" formControlName="timezone">
+      <option value="Asia/Kolkata">India Standard Time (IST)</option>
+      <option value="America/New_York">Eastern Time (ET)</option>
+    </select>
+    </div>
+
+    <label for="email" class="form-label">Enter date and time</label>
+  
+    <div class="mb-3">
+      <input type="date" formControlName="date" class="me-2">
+      <input type="time" formControlName="time" (blur)="checkTime()">
+    </div>
+    <button (click)="submitTime()">Click</button>
+  </form>
