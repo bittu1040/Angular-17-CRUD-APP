@@ -1,88 +1,101 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
-import { ColDef, GridOptions } from 'ag-grid-community';
+import { ColDef, GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
+import { PostService, Post, PaginatedResponse } from '../../services/post.service';
+import { CustomPaginationComponent } from '../custom-pagination/custom-pagination.component';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-ag-grid-table',
   standalone: true,
-  imports: [AgGridModule],
+  imports: [AgGridModule, CustomPaginationComponent, NgIf],
   templateUrl: './ag-grid-table.component.html',
-  styleUrl: './ag-grid-table.component.scss'
+  styleUrls: ['./ag-grid-table.component.scss']
 })
 export class AgGridTableComponent implements OnInit {
   pageSize = 10;
   currentPage = 1;
   totalItems = 0;
+  rowData: Post[] = [];
+  loading = false;
 
+  gridOptions: GridOptions = {
+    pagination: false,
+    suppressPaginationPanel: true,
+    rowHeight: 50,
+    defaultColDef: {
+      sortable: true,
+      filter: true,
+      resizable: true,
+    }
+  };
 
   public columnDefs: ColDef[] = [
-    { field: 'make', sortable: true, filter: true },
-    { field: 'model', sortable: true, filter: true },
-    { field: 'price' },
-    { field: 'year' },
-    { field: 'color' }
+    { 
+      field: 'id',
+      headerName: 'ID',
+      width: 100,
+      filter: 'agNumberColumnFilter'
+    },
+    { 
+      field: 'userId',
+      headerName: 'User ID',
+      width: 120,
+      filter: 'agNumberColumnFilter'
+    },
+    { 
+      field: 'title',
+      headerName: 'Title',
+      flex: 1,
+      cellRenderer: (params: ICellRendererParams) => {
+        return `<div class="cell-wrap-text">${params.value}</div>`;
+      }
+    },
+    { 
+      field: 'body',
+      headerName: 'Content',
+      flex: 2,
+      cellRenderer: (params: ICellRendererParams) => {
+        return `<div class="cell-wrap-text">${params.value}</div>`;
+      }
+    }
   ];
-  public rowData = [
-    { make: 'Toyota', model: 'Celica', price: 35000, year: 2019, color: 'Red' },
-    { make: 'Ford', model: 'Mondeo', price: 32000, year: 2018, color: 'Blue' },
-    { make: 'Porsche', model: 'Boxster', price: 72000, year: 2020, color: 'Black' },
-    { make: 'Toyota', model: 'Camry', price: 30000, year: 2017, color: 'White' },
-    { make: 'Honda', model: 'Civic', price: 27000, year: 2019, color: 'Silver' },
-    { make: 'BMW', model: '5 Series', price: 55000, year: 2021, color: 'Blue' },
-    { make: 'Mercedes', model: 'E-Class', price: 60000, year: 2020, color: 'Gray' },
-    { make: 'Audi', model: 'A4', price: 40000, year: 2018, color: 'Black' },
-    { make: 'Chevrolet', model: 'Malibu', price: 25000, year: 2017, color: 'Red' },
-    { make: 'Hyundai', model: 'Elantra', price: 22000, year: 2019, color: 'Blue' },
-    { make: 'Kia', model: 'Optima', price: 24000, year: 2020, color: 'White' },
-    { make: 'Volkswagen', model: 'Passat', price: 26000, year: 2021, color: 'Silver' },
-    { make: 'Mazda', model: '6', price: 23000, year: 2018, color: 'Red' },
-    { make: 'Subaru', model: 'Legacy', price: 28000, year: 2020, color: 'Gray' },
-    { make: 'Nissan', model: 'Altima', price: 29000, year: 2021, color: 'Black' },
-    { make: 'Lexus', model: 'ES', price: 45000, year: 2019, color: 'Blue' },
-    { make: 'Infiniti', model: 'Q50', price: 42000, year: 2018, color: 'White' },
-    { make: 'Tesla', model: 'Model S', price: 80000, year: 2021, color: 'Black' },
-    { make: 'Jaguar', model: 'XF', price: 70000, year: 2020, color: 'Gray' },
-    { make: 'Acura', model: 'TLX', price: 38000, year: 2017, color: 'Silver' },
-    { make: 'Cadillac', model: 'CTS', price: 67000, year: 2021, color: 'Blue' },
-    { make: 'Lincoln', model: 'MKZ', price: 55000, year: 2019, color: 'White' },
-    { make: 'Buick', model: 'LaCrosse', price: 33000, year: 2018, color: 'Black' },
-    { make: 'Chrysler', model: '300', price: 35000, year: 2020, color: 'Red' },
-    { make: 'Volvo', model: 'S60', price: 48000, year: 2021, color: 'Blue' },
-    { make: 'Genesis', model: 'G80', price: 52000, year: 2019, color: 'Gray' },
-    { make: 'Mitsubishi', model: 'Lancer', price: 21000, year: 2017, color: 'Silver' },
-    { make: 'Alfa Romeo', model: 'Giulia', price: 74000, year: 2020, color: 'White' },
-    { make: 'Mini', model: 'Cooper', price: 25000, year: 2021, color: 'Red' },
-    { make: 'Fiat', model: '500', price: 18000, year: 2018, color: 'Blue' }
-  ];
-  
 
-
-  constructor(private http: HttpClient) {
-
-  }
-
+  constructor(private postService: PostService) {}
 
   ngOnInit() {
-    this.fetchData();
+    this.loadPage();
   }
 
-  fetchData() {
-    this.http.post<any>('https://fakestoreapi.com/products', {
-      page: this.currentPage,
-      pageSize: this.pageSize
-    }).subscribe(response => {
-      this.rowData = response.items;
-      this.totalItems = response.total;
-    });
+  onGridReady(params: GridReadyEvent) {
+    params.api.sizeColumnsToFit();
   }
 
-  onPaginationChanged(event: any) {
-    this.currentPage = event.newPage;
-    this.fetchData();
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.loadPage();
   }
 
-  paginationNumberFormatter(params: any) {
-    return `${params.value.toLocaleString()}`;
+  onPageSizeChange(newSize: number) {
+    this.pageSize = newSize;
+    this.currentPage = 1;
+    this.loadPage();
+  }
+
+  private loadPage() {
+    this.loading = true;
+    this.postService.getPosts(this.currentPage, this.pageSize)
+      .subscribe({
+        next: (response: PaginatedResponse<Post>) => {
+          this.rowData = response.data;
+          this.totalItems = response.total;
+          this.loading = false;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Error loading posts:', error);
+          this.loading = false;
+        }
+      });
   }
 }
