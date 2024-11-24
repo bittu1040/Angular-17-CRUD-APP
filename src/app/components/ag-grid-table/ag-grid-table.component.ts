@@ -38,35 +38,29 @@ export class AgGridTableComponent implements OnInit {
     { 
       field: 'id',
       headerName: 'ID',
-      width: 100,
-      filter: 'agNumberColumnFilter',
-      floatingFilter: true
+      width: 90
     },
     { 
       field: 'userId',
       headerName: 'User ID',
-      width: 120,
-      filter: 'agNumberColumnFilter',
-      floatingFilter: true
+      width: 90
     },
     { 
       field: 'title',
       headerName: 'Title',
-      flex: 1,
       filter: 'agTextColumnFilter',
       floatingFilter: true,
       cellRenderer: (params: ICellRendererParams) => {
-        return `<div class="cell-wrap-text">${params.value}</div>`;
+        return `<div>${params.value}</div>`;
       }
     },
     { 
       field: 'body',
       headerName: 'Content',
-      flex: 2,
       filter: 'agTextColumnFilter',
       floatingFilter: true,
       cellRenderer: (params: ICellRendererParams) => {
-        return `<div class="cell-wrap-text">${params.value}</div>`;
+        return `<div>${params.value}</div>`;
       }
     }
   ];

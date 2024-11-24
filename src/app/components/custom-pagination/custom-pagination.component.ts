@@ -64,6 +64,15 @@ import { FormsModule } from '@angular/forms';
       font-size: 14px;
     }
 
+    // write responsive css for pagination-container
+    @media (max-width: 768px) {
+      .pagination-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+
     .pagination-controls {
       display: flex;
       align-items: center;
