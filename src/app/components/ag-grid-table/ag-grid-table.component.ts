@@ -17,6 +17,7 @@ export class AgGridTableComponent implements OnInit {
   pageSize = 10;
   currentPage = 1;
   totalItems = 0;
+  totalPages = 0;
   rowData: Post[] = [];
   loading = false;
 
@@ -69,15 +70,17 @@ export class AgGridTableComponent implements OnInit {
   }
 
   onGridReady(params: GridReadyEvent) {
-    params.api.sizeColumnsToFit();
+    // params.api.sizeColumnsToFit();
   }
 
   onPageChange(page: number) {
+    console.log('onPageChange', page);
     this.currentPage = page;
     this.loadPage();
   }
 
   onPageSizeChange(newSize: number) {
+    console.log('onPageSizeChange', newSize);
     this.pageSize = newSize;
     this.currentPage = 1;
     this.loadPage();
@@ -89,7 +92,8 @@ export class AgGridTableComponent implements OnInit {
       .subscribe({
         next: (response: PaginatedResponse<Post>) => {
           this.rowData = response.data;
-          this.totalItems = response.total;
+          this.totalItems = response.pagination.totalData;
+          this.totalPages = response.pagination.totalPages;
           this.loading = false;
         },
         error: (error: HttpErrorResponse) => {

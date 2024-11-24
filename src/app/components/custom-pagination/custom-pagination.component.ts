@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
           title="Previous page">
           &lt;
         </button>
-        <span class="page-info">page {{ currentPage }} of {{ totalPages }}</span>
+        <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
         <button 
           class="page-btn"
           [disabled]="currentPage === totalPages"
@@ -43,13 +43,13 @@ import { FormsModule } from '@angular/forms';
       <div class="results-info">
         <div class="page-size-selector">
           Results per page
-          <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange($event)">
-            <option [ngValue]="10">10</option>
-            <option [ngValue]="20">20</option>
-            <option [ngValue]="50">50</option>
+          <select #sizeSelect (change)="onPageSizeChange(sizeSelect.value)">
+            <option [value]="10" [selected]="pageSize === 10">10</option>
+            <option [value]="20" [selected]="pageSize === 20">20</option>
+            <option [value]="50" [selected]="pageSize === 50">50</option>
           </select>
         </div>
-        <span class="total-items">of {{ totalItems }}</span>
+        <span class="total-items">Total: {{ totalItems }}</span>
       </div>
     </div>
   `,
@@ -129,14 +129,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class CustomPaginationComponent {
   @Input() currentPage: number = 1;
+  @Input() totalPages: number = 0;
   @Input() pageSize: number = 10;
   @Input() totalItems: number = 0;
   @Output() pageChange = new EventEmitter<number>();
   @Output() pageSizeChange = new EventEmitter<number>();
-
-  get totalPages(): number {
-    return Math.ceil(this.totalItems / this.pageSize);
-  }
 
   onPageChange(page: number): void {
     if (page >= 1 && page <= this.totalPages && page !== this.currentPage) {
@@ -144,9 +141,10 @@ export class CustomPaginationComponent {
     }
   }
 
-  onPageSizeChange(newSize: number): void {
-    if (newSize !== this.pageSize) {
-      this.pageSizeChange.emit(newSize);
+  onPageSizeChange(newSize: string): void {
+    const size = parseInt(newSize, 10);
+    if (size !== this.pageSize) {
+      this.pageSizeChange.emit(size);
     }
   }
 }
