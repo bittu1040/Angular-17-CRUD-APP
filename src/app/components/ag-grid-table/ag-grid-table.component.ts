@@ -29,7 +29,9 @@ export class AgGridTableComponent implements OnInit {
       sortable: true,
       filter: true,
       resizable: true,
-    }
+      floatingFilter: true
+    },
+    onFilterChanged: this.onFilterChanged.bind(this)
   };
 
   public columnDefs: ColDef[] = [
@@ -37,18 +39,22 @@ export class AgGridTableComponent implements OnInit {
       field: 'id',
       headerName: 'ID',
       width: 100,
-      filter: 'agNumberColumnFilter'
+      filter: 'agNumberColumnFilter',
+      floatingFilter: true
     },
     { 
       field: 'userId',
       headerName: 'User ID',
       width: 120,
-      filter: 'agNumberColumnFilter'
+      filter: 'agNumberColumnFilter',
+      floatingFilter: true
     },
     { 
       field: 'title',
       headerName: 'Title',
       flex: 1,
+      filter: 'agTextColumnFilter',
+      floatingFilter: true,
       cellRenderer: (params: ICellRendererParams) => {
         return `<div class="cell-wrap-text">${params.value}</div>`;
       }
@@ -57,11 +63,15 @@ export class AgGridTableComponent implements OnInit {
       field: 'body',
       headerName: 'Content',
       flex: 2,
+      filter: 'agTextColumnFilter',
+      floatingFilter: true,
       cellRenderer: (params: ICellRendererParams) => {
         return `<div class="cell-wrap-text">${params.value}</div>`;
       }
     }
   ];
+
+  private gridApi: any;
 
   constructor(private postService: PostService) {}
 
@@ -70,7 +80,7 @@ export class AgGridTableComponent implements OnInit {
   }
 
   onGridReady(params: GridReadyEvent) {
-    // params.api.sizeColumnsToFit();
+    this.gridApi = params.api;
   }
 
   onPageChange(page: number) {
@@ -86,11 +96,17 @@ export class AgGridTableComponent implements OnInit {
     this.loadPage();
   }
 
+  onFilterChanged() {
+    const filterModel = this.gridApi.getFilterModel();
+    console.log('Filter Model:', filterModel);
+  }
+
   private loadPage() {
     this.loading = true;
     this.postService.getPosts(this.currentPage, this.pageSize)
       .subscribe({
         next: (response: PaginatedResponse<Post>) => {
+          console.log('Response:', response);
           this.rowData = response.data;
           this.totalItems = response.pagination.totalData;
           this.totalPages = response.pagination.totalPages;
