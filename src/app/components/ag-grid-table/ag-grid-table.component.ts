@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 import { ColDef, GridOptions, GridReadyEvent, ICellRendererParams } from 'ag-grid-community';
 import { PostService, Post, PaginatedResponse } from '../../services/post.service';
@@ -20,6 +20,8 @@ export class AgGridTableComponent implements OnInit {
   totalPages = 0;
   rowData: Post[] = [];
   loading = false;
+
+  postService= inject(PostService);
 
   gridOptions: GridOptions = {
     pagination: false,
@@ -67,7 +69,6 @@ export class AgGridTableComponent implements OnInit {
 
   private gridApi: any;
 
-  constructor(private postService: PostService) {}
 
   ngOnInit() {
     this.loadPage();
