@@ -1,0 +1,18 @@
+.pagination-alignment{
+    display: flex;
+    justify-content: left;
+}
+
+.pagination-buttons{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+button:disabled {
+    cursor: not-allowed !important;
+    opacity: 0.6;
+    pointer-events: visible !important;
+}
+
+
