@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import moment from 'moment';
 import 'moment-timezone';
+import { interval, Subscription } from 'rxjs';
+
+dayjs.extend(utc)
 
 @Component({
   selector: 'app-momentjs-date-time-demo',
@@ -15,6 +20,10 @@ export class MomentjsDateTimeDemoComponent implements OnInit {
   timeForm!: FormGroup;
   currentTime: string = moment().format('HH:mm');
 
+  localTime: string = '';
+  utcTime: string = '';
+  private timeSubscription!: Subscription;
+
   ngOnInit(): void {
     this.currentTime = moment().format('HH:mm');
     this.timeForm = new FormGroup({
@@ -22,9 +31,18 @@ export class MomentjsDateTimeDemoComponent implements OnInit {
       time: new FormControl(""),
       timezone: new FormControl('Asia/Kolkata'),
     });
+
+    this.updateTimes();
+    this.timeSubscription = interval(60000).subscribe(() => this.updateTimes());
+
   }
 
 
+  updateTimes(): void {
+    const now = dayjs();
+    this.localTime = now.format('YYYY-MM-DD h:mm A');
+    this.utcTime = now.utc().format('YYYY-MM-DD h:mm A'); 
+  }
 
   checkTime() {
     const selectedTime = this.timeForm.get('time')?.value;
@@ -68,6 +86,14 @@ export class MomentjsDateTimeDemoComponent implements OnInit {
       const dateTime = this.getCombinedDateTime(date, time, timezone);
 
       console.log(dateTime);
+  }
+
+
+  ngOnDestroy(): void {
+    // Unsubscribe to prevent memory leaks
+    if (this.timeSubscription) {
+      this.timeSubscription.unsubscribe();
+    }
   }
 
 }

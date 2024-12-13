@@ -33,6 +33,7 @@
     "ag-grid-community": "^32.3.2",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
+    "dayjs": "^1.11.13",
     "emailjs-com": "^3.2.0",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.2",

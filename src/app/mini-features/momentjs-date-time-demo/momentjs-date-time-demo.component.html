@@ -1,19 +1,46 @@
 <form [formGroup]="timeForm" class="container p-4 mt-3 border rounded bg-light">
-    <h2>Work with date, time and moment js</h2>
+  <h2>Work with date, time and DayJS js</h2>
 
-    <div class="mb-3">
+  <div class="container mt-2">
+    <div class="row justify-content-around">
+      <div class="col-md-6">
+        <div class="card shadow border-primary">
+          <div class="card-header bg-primary text-white text-center">
+            <h4>Local Time</h4>
+          </div>
+          <div class="card-body text-center">
+            <h5 class="time-display">{{ localTime }}</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card shadow border-success">
+          <div class="card-header bg-success text-white text-center">
+            <h4>UTC Time</h4>
+          </div>
+          <div class="card-body text-center">
+            <h5 class="time-display">{{ utcTime }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <div class="mb-3 mt-3">
     <label for="timezone">Timezone:</label>
     <select id="timezone" formControlName="timezone">
       <option value="Asia/Kolkata">India Standard Time (IST)</option>
       <option value="America/New_York">Eastern Time (ET)</option>
     </select>
-    </div>
+  </div>
 
-    <label for="email" class="form-label">Enter date and time</label>
-  
-    <div class="mb-3">
-      <input type="date" formControlName="date" class="me-2">
-      <input type="time" formControlName="time" (blur)="checkTime()">
-    </div>
-    <button (click)="submitTime()">Click</button>
-  </form>
+  <label for="email" class="form-label">Enter date and time</label>
+
+  <div class="mb-3">
+    <input type="date" formControlName="date" class="me-2">
+    <input type="time" formControlName="time" (blur)="checkTime()">
+  </div>
+  <button (click)="submitTime()">Click</button>
+</form>
