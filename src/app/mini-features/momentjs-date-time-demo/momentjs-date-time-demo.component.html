@@ -3,7 +3,7 @@
 
   <div class="mt-2">
     <div class="row justify-content-around">
-      <div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+      <div class="col-xl-4 col-lg-6 col-md-6 mb-3 mb-md-0">
         <div class="card shadow border-primary">
           <div class="card-header bg-primary text-white text-center">
             <h4>Local Time</h4>
@@ -14,7 +14,7 @@
         </div>
       </div>
   
-      <div class="col-lg-4 col-md-6">
+      <div class="col-xl-4 col-lg-6 col-md-6">
         <div class="card shadow border-success">
           <div class="card-header bg-success text-white text-center">
             <h4>UTC Time</h4>
@@ -28,7 +28,51 @@
   </div>
   
 
+
   <div class="mb-3 mt-3">
+    <label for="date" class="form-label">Select Date:</label>
+    <input id="date" type="date" class="form-control" formControlName="date" />
+  </div>
+
+  <div class="mb-3">
+    <label for="time" class="form-label">Select Time:</label>
+    <input id="time" type="time" class="form-control" formControlName="time" />
+  </div>
+
+  <div class="mb-3">
+    <label for="timezone" class="form-label">Select Timezone:</label>
+    <select id="timezone" class="form-control" formControlName="timezone">
+      @for (tz of timezones; track tz.value) {
+        <option [value]="tz.value">{{ tz.label }}</option>
+        } @empty {
+        <option> No timezones </option>
+        }
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="format" class="form-label">Select Date & Time Format:</label>
+    <select id="format" class="form-control" formControlName="format">
+      @for (format of dateTimeFormats; track format) {
+        <option [value]="format">{{ format }}</option>
+        } @empty {
+        <option> No formats </option>
+        }
+    </select>
+  </div>
+
+  <button type="submit" (click)="convertTime()" class="btn btn-primary mt-3" [disabled]="timeForm.invalid">
+    Convert Time
+  </button>
+
+  @if(convertedTime) {
+  <div class="mt-4">
+    <h5>Converted Time:</h5>
+    <p>{{ convertedTime }}</p>
+  </div>
+ }
+
+  <!-- <div class="mb-3 mt-3">
     <label for="timezone">Timezone:</label>
     <select id="timezone" formControlName="timezone">
       <option value="Asia/Kolkata">India Standard Time (IST)</option>
@@ -42,5 +86,5 @@
     <input type="date" formControlName="date" class="me-2">
     <input type="time" formControlName="time" (blur)="checkTime()">
   </div>
-  <button (click)="submitTime()">Click</button>
+  <button (click)="submitTime()">Click</button> -->
 </form>

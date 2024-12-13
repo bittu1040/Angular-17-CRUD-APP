@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 import moment from 'moment';
 import 'moment-timezone';
 import { interval, Subscription } from 'rxjs';
+import { dateTimeFormats, timezones } from './time-settings';
 
-dayjs.extend(utc)
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 @Component({
   selector: 'app-momentjs-date-time-demo',
@@ -24,12 +27,17 @@ export class MomentjsDateTimeDemoComponent implements OnInit {
   utcTime: string = '';
   private timeSubscription!: Subscription;
 
+  timezones = timezones;
+  dateTimeFormats = dateTimeFormats;
+  convertedTime: string | null = null;
+
   ngOnInit(): void {
     this.currentTime = moment().format('HH:mm');
     this.timeForm = new FormGroup({
       date: new FormControl(moment().format('YYYY-MM-DD')),
-      time: new FormControl(""),
+      time: new FormControl(moment().format('HH:mm')),
       timezone: new FormControl('Asia/Kolkata'),
+      format: new FormControl('MM/DD/YYYY hh:mm A')
     });
 
     this.updateTimes();
@@ -42,6 +50,22 @@ export class MomentjsDateTimeDemoComponent implements OnInit {
     const now = dayjs();
     this.localTime = now.format('YYYY-MM-DD h:mm A');
     this.utcTime = now.utc().format('YYYY-MM-DD h:mm A'); 
+  }
+
+  convertTime(): void {
+    if (this.timeForm.invalid) {
+      return;
+    }
+
+    const { date, time, timezone, format } = this.timeForm.value;
+
+    // Combine date and time
+    const dateTime = `${date} ${time}`;
+
+    // Convert and format the time
+    this.convertedTime = dayjs(dateTime)
+      .tz(timezone)
+      .format(format);
   }
 
   checkTime() {
