@@ -1,25 +1,17 @@
-.container {
-    margin-top: 2rem;
-  
-    .card {
-      border-radius: 10px;
-      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  
-      &:hover {
+.card {
+    border-radius: 10px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    &:hover {
         transform: scale(1.05);
         box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      }
-  
-      .card-header {
+    }
+    .card-header {
         font-weight: bold;
         font-size: 1.25rem;
-      }
-  
-      .time-display {
+    }
+    .time-display {
         font-size: 1.5rem;
         font-weight: 600;
         color: #333;
-      }
-    }
-  }
-  
+        }
+}
