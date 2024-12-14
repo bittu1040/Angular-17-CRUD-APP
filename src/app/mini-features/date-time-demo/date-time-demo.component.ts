@@ -12,13 +12,13 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 @Component({
-  selector: 'app-momentjs-date-time-demo',
+  selector: 'app-date-time-demo',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './momentjs-date-time-demo.component.html',
-  styleUrl: './momentjs-date-time-demo.component.scss'
+  templateUrl: './date-time-demo.component.html',
+  styleUrl: './date-time-demo.component.scss'
 })
-export class MomentjsDateTimeDemoComponent implements OnInit {
+export class DateTimeDemoComponent implements OnInit {
 
   timeForm!: FormGroup;
   currentTime: string = moment().format('HH:mm');
