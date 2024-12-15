@@ -1,5 +1,14 @@
 
 <app-date-time-demo> </app-date-time-demo>
-<app-pagination-ui> </app-pagination-ui>
+<app-pagination-ui
+[currentPageNumber]="pageNumber"
+[totalPages]="totalPages"
+[currentPageSize]="currentPageSize"
+[pageSizes]="pageSizes"
+[totalItems]="totalItems"
+(pageChange)="onPageChange($event)"
+(pageSizeChange)="onPageSizeUpdate($event)"
+>
+</app-pagination-ui>
 
 <app-check-username-unique> </app-check-username-unique>
