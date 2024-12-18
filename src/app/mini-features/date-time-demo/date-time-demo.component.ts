@@ -34,6 +34,7 @@ export class DateTimeDemoComponent implements OnInit {
     this.timeForm = new FormGroup({
       date: new FormControl(moment().format('YYYY-MM-DD')),
       time: new FormControl(moment().format('HH:mm')),
+      dateTime: new FormControl(null),
       timezone: new FormControl('Asia/Kolkata'),
       format: new FormControl('MM/DD/YYYY hh:mm A')
     });

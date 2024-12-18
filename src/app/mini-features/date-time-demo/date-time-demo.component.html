@@ -41,6 +41,27 @@
       <label for="time" class="form-label">Select Time:</label>
       <input id="time" type="time" class="form-control" formControlName="time" />
     </div>
+
+    <div class="col-12 mb-5 mt-4 text-center">
+      <div class="d-flex align-items-center justify-content-center">
+        <hr class="flex-grow-1" />
+        <span class="mx-3 text-muted">Or</span>
+        <hr class="flex-grow-1" />
+      </div>
+    </div>
+
+    <div class="col-12 mb-3">
+      <label for="datetime" class="form-label">Enter Date & Time (Optional): e.g., 2024-12-18T14:30 (Not implemented yet)</label>
+      <input
+        id="datetime"
+        type="text"
+        class="form-control"
+        formControlName="dateTime"
+        placeholder="e.g., 2024-12-18T14:30 or 12/18/2024 2:30 PM"
+      />
+    </div>
+
+
     <div class="col-12 col-md-6 mb-3">
       <label for="timezone" class="form-label">Select Timezone:</label>
       <select id="timezone" class="form-control" formControlName="timezone">
