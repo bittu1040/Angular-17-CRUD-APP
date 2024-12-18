@@ -21,7 +21,6 @@ dayjs.extend(timezone);
 export class DateTimeDemoComponent implements OnInit {
 
   timeForm!: FormGroup;
-  currentTime: string = moment().format('HH:mm');
 
   localTime: string = '';
   utcTime: string = '';
@@ -32,7 +31,6 @@ export class DateTimeDemoComponent implements OnInit {
   convertedTime: string | null = null;
 
   ngOnInit(): void {
-    this.currentTime = moment().format('HH:mm');
     this.timeForm = new FormGroup({
       date: new FormControl(moment().format('YYYY-MM-DD')),
       time: new FormControl(moment().format('HH:mm')),
@@ -60,52 +58,8 @@ export class DateTimeDemoComponent implements OnInit {
     const { date, time, timezone, format } = this.timeForm.value;
 
     const dateTime = `${date} ${time}`;
-    
+
     this.convertedTime = dayjs.utc(dateTime).tz(timezone).format(format);
-  }
-
-  checkTime() {
-    const selectedTime = this.timeForm.get('time')?.value;
-    if (moment(selectedTime, 'HH:mm').isBefore(moment(this.currentTime, 'HH:mm'))) {
-      this.timeForm.get('time')?.setValue(this.currentTime);
-      alert('The selected time is earlier than the current time.');
-    }
-  }
-
-
-  getCombinedDateTime(date: string, time: string, timezone: string): string {
-    const isToday = moment.tz(date, timezone).isSame(moment().tz(timezone), 'day');
-    const formattedTime = time || (isToday ? moment().tz(timezone).format('HH:mm') : '00:00');
-
-    // Construct date-time in the selected timezone
-    return moment.tz(`${date} ${formattedTime}`, 'YYYY-MM-DD HH:mm', timezone).toISOString();
-  }
-
-  isPastTime(date: string, time: string, timezone: string): boolean {
-    const selectedDateTime = moment.tz(`${date} ${time}`, 'YYYY-MM-DD HH:mm', timezone);
-    const currentDateTime = moment().tz(timezone);
-    return selectedDateTime.isBefore(currentDateTime);
-  }
-
-
-
-  submitTime(){
-
-      console.log(this.timeForm.value);
-
-      const date = this.timeForm.value.date;
-      const time = this.timeForm.value.time;
-      const timezone = this.timeForm.value.timezone;
-  
-      if (time && this.isPastTime(date, time, timezone)) {
-        alert('Selected time is in the past for the chosen timezone.');
-        return;
-      }
-  
-      // Get the combined date and time in ISO format based on the timezone
-      const dateTime = this.getCombinedDateTime(date, time, timezone);
-
-      console.log(dateTime);
   }
 
 
