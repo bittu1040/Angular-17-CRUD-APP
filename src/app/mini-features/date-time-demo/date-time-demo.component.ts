@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -18,7 +18,7 @@ dayjs.extend(timezone);
   templateUrl: './date-time-demo.component.html',
   styleUrl: './date-time-demo.component.scss'
 })
-export class DateTimeDemoComponent implements OnInit {
+export class DateTimeDemoComponent implements OnInit, OnDestroy {
 
   timeForm!: FormGroup;
 
