@@ -59,13 +59,9 @@ export class DateTimeDemoComponent implements OnInit {
 
     const { date, time, timezone, format } = this.timeForm.value;
 
-    // Combine date and time
     const dateTime = `${date} ${time}`;
-
-    // Convert and format the time
-    this.convertedTime = dayjs(dateTime)
-      .tz(timezone)
-      .format(format);
+    
+    this.convertedTime = dayjs.utc(dateTime).tz(timezone).format(format);
   }
 
   checkTime() {
