@@ -1,16 +1,19 @@
 <div class="container p-4 mt-3 border rounded bg-light">
     <h2 class="mb-4">Pagination UI</h2>
     <div class="row align-items-center">
-        <div class="col-12 col-md-6 d-flex justify-content-md-start pagination-buttons mb-3 mb-md-0">
+        <div class="col-12 col-md-6 d-flex align-items-center pagination-buttons mb-3">
+            <div class="d-flex">
                 <button class="btn btn-outline-secondary me-2" [disabled]="currentPageNumber === 1" (click)="goToFirstPage()">
                     <i class="bi bi-chevron-double-left"></i>
                 </button>
                 <button class="btn btn-outline-secondary me-2" [disabled]="currentPageNumber === 1" (click)="goToPreviousPage()">
                     <i class="bi bi-chevron-left"></i>
                 </button>
-                <span class="fs-5 mx-2">
-                    {{ currentPageNumber }} of {{ totalPages }}
-                </span>
+            </div>
+            <span class="fs-6 mx-2 text-nowrap">
+                {{ currentPageNumber }} of {{ totalPages }}
+            </span>
+            <div class="d-flex">
                 <button class="btn btn-outline-secondary me-2" [disabled]="currentPageNumber === totalPages" (click)="goToNextPage()">
                     <i class="bi bi-chevron-right"></i>
                 </button>
@@ -18,21 +21,22 @@
                     <i class="bi bi-chevron-double-right"></i>
                 </button>
             </div>
-            <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center results-info">
-                <div class="page-size-selector">
-                    Results per page
-                    <select #sizeSelect (change)="onPageSizeChange(sizeSelect.value)">
-                        @for (size of pageSizes; track $index) {
-                        <option [value]="size" [selected]="currentPageSize === size">
-                            {{ size }}
-                        </option>
-                        }
-                    </select>
-                </div>
-                @if(totalItems){
-                <span class="total-items">of {{ totalItems }}</span>
-                }
-            </div>
         </div>
+        <div class="col-12 col-md-6 d-flex justify-content-md-end align-items-center results-info">
+            <div class="page-size-selector">
+                Results per page
+                <select #sizeSelect (change)="onPageSizeChange(sizeSelect.value)">
+                    @for (size of pageSizes; track $index) {
+                    <option [value]="size" [selected]="currentPageSize === size">
+                        {{ size }}
+                    </option>
+                    }
+                </select>
+            </div>
+            @if(totalItems){
+            <span class="total-items">of {{ totalItems }}</span>
+            }
+        </div>
+    </div>
     
 </div>
