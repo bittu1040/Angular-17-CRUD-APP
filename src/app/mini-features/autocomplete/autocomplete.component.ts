@@ -10,8 +10,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './autocomplete.component.scss'
 })
 export class AutocompleteComponent {
-  searchText: string = '';
-  items: string[] = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  items: string[] = ['Ruby', 'Typescript', 'JavaScript', 'Python', 'Java'];
+  searchText: string = this.items[0];
   filteredItems: string[] = [];
   showDropdown: boolean = false;
 
@@ -30,14 +30,15 @@ export class AutocompleteComponent {
     this.filteredItems = [];
   }
 
-  // handleClickInside(event: Event){
-  //   event.stopPropagation();
-  // }
+  handleClickInside(event: Event){
+    event.stopPropagation();
+  }
 
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: Event) {
+    this.filteredItems = [];
     if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.filteredItems = [];
+      // this.filteredItems = [];
     }
   }
 }

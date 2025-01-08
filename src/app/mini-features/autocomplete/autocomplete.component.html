@@ -1,6 +1,6 @@
 <div class="container p-4 mt-3 border rounded bg-light">
     <h3>Autocomplete</h3>
-    <div class="autocomplete">
+    <div class="autocomplete" (click)="handleClickInside($event)">
         <input type="text" [(ngModel)]="searchText" (input)="filter()" (focus)="showSuggestions()"
             placeholder="Search" />
         @if(filteredItems.length > 0){
