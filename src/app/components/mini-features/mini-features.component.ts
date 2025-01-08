@@ -3,11 +3,12 @@ import { CheckUsernameUniqueComponent } from '../../mini-features/check-username
 import { DateTimeDemoComponent } from '../../mini-features/date-time-demo/date-time-demo.component';
 import { PaginationUIComponent } from "../../mini-features/pagination-ui/pagination-ui.component";
 import { PaginationNgComponent, PaginationNgService } from '@bittu1040/pagination-ng';
+import { AutocompleteComponent } from '../../mini-features/autocomplete/autocomplete.component';
 
 @Component({
   selector: 'app-mini-features',
   standalone: true,
-  imports: [CheckUsernameUniqueComponent, DateTimeDemoComponent, PaginationUIComponent, PaginationNgComponent],
+  imports: [CheckUsernameUniqueComponent, DateTimeDemoComponent, PaginationUIComponent, PaginationNgComponent, AutocompleteComponent],
   templateUrl: './mini-features.component.html',
   styleUrl: './mini-features.component.scss'
 })
