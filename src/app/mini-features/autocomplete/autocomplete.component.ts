@@ -35,10 +35,10 @@ export class AutocompleteComponent {
   }
 
   @HostListener('document:click', ['$event'])
-  handleClickOutside(event: Event) {
-    this.filteredItems = [];
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      // this.filteredItems = [];
+  handleClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('input') && !target.closest('.suggestions')) {
+      this.filteredItems = [];
     }
   }
 }
