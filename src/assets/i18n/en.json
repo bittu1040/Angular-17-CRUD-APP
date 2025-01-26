@@ -13,6 +13,7 @@
     "title": "What's Next?",
     "subtitle": "Here's what I'm planning to do next:",
     "user_auth": "Implement the user authentication system with Firebase (Login, Logout, Register, Forgot password)",
+    "user_Oauth": "Implement Social login (Google, GitHub etc ... ) using firebase OAuth", 
     "auth_guard": "Implement Route/Auth guard",
     "crud_operation": "CRUD operation in Table with Firebase",
     "reusable_table": "Reusable table with Sorting, Searching, and Pagination feature",
