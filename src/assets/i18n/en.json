@@ -25,6 +25,8 @@
     "eslint_prettier": "Learn and implement ESLint and Prettier for better code quality",
     "bundler": "Learn and implement Webpack or any bundler for better build process",
     "demo": "Demo (route, child route, reusable forms)",
+    "pagination_package": "reusable pagination component and publish package in NPM",
+    "reusable_side_panel": "Create a reusable side component in Angular with dynamic data pass and publish package in npm",
     "status": {
       "implemented": "Implemented",
       "ongoing": "Ongoing",
