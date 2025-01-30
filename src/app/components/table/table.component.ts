@@ -17,6 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgFor, SlicePipe } from '@angular/common';
 import { map } from 'rxjs/operators';
 import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarComponent } from '../../mini-features/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-table',
@@ -33,6 +34,7 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
     NgFor,
     NgbPagination,
     SlicePipe,
+    SidebarComponent,
   ],
 })
 export class TableComponent {
@@ -43,6 +45,8 @@ export class TableComponent {
   isLoading: boolean = true;
   page = 1;
   pageSize = 10;
+  selectedPerson!: Person;
+  openSidebar: boolean = false;
 
   constructor(
     private data: DataService,
@@ -172,5 +176,14 @@ export class TableComponent {
         user.city.toLowerCase().includes(filterValue) ||
         user.age.toString().includes(filterValue),
     );
+  }
+
+  toggleSideBar(person: Person) {
+    this.selectedPerson = person;
+    this.openSidebar = !this.openSidebar;
+  }
+
+  onToggleSideBar(open: boolean) {
+    this.openSidebar = open;
   }
 }
