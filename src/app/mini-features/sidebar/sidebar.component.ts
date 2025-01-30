@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -10,12 +11,13 @@ import {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent implements OnChanges {
   @Input() open: boolean = false;
+  @Input() headerText!: string;
   @Input() data!: { [key: string]: any };
   @Output() sideBarToggled: EventEmitter<boolean> = new EventEmitter();
   columns!: string[];

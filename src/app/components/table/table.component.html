@@ -87,7 +87,8 @@
         </tbody>
       }
     </table>
-    <app-sidebar [data]='selectedPerson' [open]="openSidebar" (sideBarToggled)="onToggleSideBar($event)"></app-sidebar>
+    <app-sidebar headerText="Details" [data]='selectedPerson' [open]="openSidebar"
+      (sideBarToggled)="onToggleSideBar($event)"></app-sidebar>
 
     <ngb-pagination
       [collectionSize]="filteredDataSource.length"
