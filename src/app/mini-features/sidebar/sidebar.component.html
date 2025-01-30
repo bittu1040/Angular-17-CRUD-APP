@@ -1,0 +1,14 @@
+<div class="sidebar" [class.open]="open">
+    <div class="sidebar-container">
+        <button class="btn btn-primary" (click)="toggleSidebar()">Close</button>
+        <div>
+            <h3>Details</h3>
+        </div>
+        <ul>
+            <li *ngFor="let column of columns">
+                <span>{{column}}</span> :
+                <span>{{ data[column] }}</span>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -28,6 +28,7 @@
           <th>Age</th>
           <th>Edit</th>
           <th>Delete</th>
+          <th>Details</th>
         </tr>
       </thead>
       @if (isLoading) {
@@ -68,6 +69,11 @@
                   <i class="fas fa-trash-alt"></i>
                 </button>
               </td>
+              <td>
+                <button class="btn btn-sm btn-outline-info" (click)="toggleSideBar(item)">
+                  <i class="fas fa-info-circle"></i>
+                </button>
+              </td>
             </tr>
           }
         </tbody>
@@ -81,6 +87,7 @@
         </tbody>
       }
     </table>
+    <app-sidebar [data]='selectedPerson' [open]="openSidebar" (sideBarToggled)="onToggleSideBar($event)"></app-sidebar>
 
     <ngb-pagination
       [collectionSize]="filteredDataSource.length"
