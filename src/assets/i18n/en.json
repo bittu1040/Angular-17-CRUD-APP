@@ -27,7 +27,7 @@
     "demo": "Demo (route, child route, reusable forms)",
     "pagination_package": "reusable pagination component and publish package in NPM",
     "reusable_side_panel": "Create a reusable side component in Angular with dynamic data pass and publish package in npm",
-    "loading_spinner": "Handle loading indicators in angular: globally using http interceptor and locally for component wise"
+    "loading_spinner": "Handle loading indicators in angular: globally using http interceptor and locally for component wise",
     "status": {
       "implemented": "Implemented",
       "ongoing": "Ongoing",
